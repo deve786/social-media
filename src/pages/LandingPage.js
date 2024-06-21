@@ -7,9 +7,9 @@ import LeftSection from '../components/LeftSection'
 
 function LandingPage() {
   return (
-    <div className=''>
+    <div className='overflow-hidden'>
         {/* <Navbar/> */}
-        <div className='flex justify-between p-3 gap-2 min-h-screen overflow'>
+        <div className='flex justify-between p-3 gap-2 h-screen '>
             <LeftSection/>
             <PostSection/>
             <Suggest/>

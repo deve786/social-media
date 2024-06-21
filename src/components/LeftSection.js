@@ -4,9 +4,9 @@ import FriendsList from './FriendsList'
 
 function LeftSection() {
   return (
-    <div className='left-section flex flex-col gap-10 bg-white h-screen rounded-xl overflow-hidden'>
+    <div className='left-section flex flex-col gap-10 bg-white min-h-[96vh] rounded-xl '>
         <Options/>
-        <hr className='w-full'/>
+        <hr/>
         <FriendsList/>
     </div>
   )

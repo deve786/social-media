@@ -16,10 +16,12 @@ function Options() {
           <span>Message</span>
         </button>
       </Link>
-      <button className='flex items-center gap-2 hover:text-primary-color'>
-      <i class="fa-solid fa-envelope "></i>
-        <span>Notifications</span>
-      </button>
+      <Link to='/notifications'>
+        <button className='flex items-center gap-2 hover:text-primary-color'>
+        <i class="fa-solid fa-envelope "></i>
+          <span>Notifications</span>
+        </button>
+      </Link>
 
     </div>
   )
