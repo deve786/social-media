@@ -4,7 +4,7 @@ import Notifications from '../components/Notifications'
 
 function Notification() {
   return (
-    <div className='flex p-3 gap-3 h-screen'>
+    <div className='flex p-3 gap-3 h-screen  justify-between  overflow-hidden '>
         <Options/>
         <Notifications/>
     </div>

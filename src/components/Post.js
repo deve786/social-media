@@ -16,16 +16,16 @@ function Post() {
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima nihil labore totam iste, voluptates, officia laborum sequi distinctio, iusto at harum dolorem. Qui, quod. Voluptatem ratione similique rem. Tenetur, eaque.</p>
         <img src="./post.jpg" alt="" className='w-full rounded' />
       </div>
-      <div className='flex justify-between px-4'>
+      {/* <div className='flex justify-between px-4'>
         <div className='gap-2 flex items-center'><i class="fa-regular fa-heart text-xl cursor-pointer hover:text-primary-color"></i>25 Like</div>
         <div className='gap-2 flex items-center'><i class="fa-regular fa-message text-xl cursor-pointer hover:text-primary-color"></i>14 Comment</div>
         <div className='gap-2 flex items-center'><i class="fa-solid fa-share text-xl cursor-pointer hover:text-primary-color"></i>10 Share</div>
-      </div>
+      </div> */}
       <div>
-        <div className='flex justify-between'>
-          <img src="./avatar.png" alt="" className='w-16 rounded-full' />
+        <div className='flex justify-between w-fit '>
+          <img src="./avatar.png" alt="" className='sm:w-16 w-10 ' />
           <div className='relative w-full bg-gray-100 flex'>
-            <input type="text" className='w-full bg-transparent outline-none px-4 py-2 text-sm' placeholder="Add a comment..." />
+            <input type="text" className='w-full bg-transparent outline-none px-4 py-2 text-sm ' placeholder="Add a comment..." />
             <i className="far fa-smile text-xl cursor-pointer absolute top-1/2 transform -translate-y-1/2 right-4"></i>
           </div>
           <button className='ml-3'>

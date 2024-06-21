@@ -4,7 +4,7 @@ import ChatInput from './ChatInput'
 
 function ChatSection() {
   return (
-    <div className='flex-1 bg-white rounded-xl justify-between flex flex-col'>
+    <div className=' bg-white rounded-xl justify-between hidden flex-col md:flex md:flex-1'>
       <div className='flex flex-col justify-between'>
         <div className='flex items-center justify-between cursor-pointer py-3 pe-3  '>
           <div className='flex'>

@@ -3,7 +3,7 @@ import LeftSection from './LeftSection'
 
 function Suggest() {
   return (
-    <div className='bg-white p-3 px-5 h-[96vh] rounded-xl overflow-y-scroll h-[96vh]  no-scrollbar'>
+    <div className='bg-white p-3 px-5 rounded-xl overflow-y-scroll h-[96vh]  no-scrollbar hidden md:block'>
       <h2 className='mb-3 font-semibold'>Suggested Friend</h2>
       
         <div className='flex items-center justify-between gap-4 cursor-pointer py-3 pe-3  hover:bg-hover-bg'>

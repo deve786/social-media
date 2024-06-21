@@ -5,7 +5,7 @@ import Options from '../components/Options'
 
 function Message() {
   return (
-    <div className='flex justify-between p-3 gap-3 h-screen overflow-hidden'>
+    <div className='flex justify-between p-3 gap-3 h-screen overflow-hidden '>
         <Options />
         <MessageList/>
         <ChatSection/>

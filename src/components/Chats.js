@@ -2,7 +2,7 @@ import React from 'react'
 
 function Chats() {
     return (
-        <div className='p-3 overflow-y-scroll h-[75vh]  custom-scrollbar'>
+        <div className='p-3 overflow-y-scroll h-[74vh]  custom-scrollbar'>
             <div className='flex items-center justify-start cursor-pointer py-3 pe-3  '>
                 <div>
                     <img src="./avatar.png" alt="" className='w-14' />

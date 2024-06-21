@@ -10,7 +10,7 @@ function Notifications() {
                         <div><img src="./avatar.png" alt="" className='w-16' /></div>
                         <div className='flex flex-col leading-4 '>
 
-                            <p className='text-md'><span className='font-semibold'>dev</span> send follow request </p>
+                            <p className='md:text-md text-sm'><span className='font-semibold'>dev</span> send follow request </p>
                         </div>
                     </div>
                     <div>
@@ -23,7 +23,7 @@ function Notifications() {
                         <div><img src="./avatar.png" alt="" className='w-16' /></div>
                         <div className='flex flex-col leading-4 '>
 
-                            <p className='text-md'><span className='font-semibold'>Kevin</span> send follow request </p>
+                            <p className='md:text-md text-sm'><span className='font-semibold'>Kevin</span> send follow request </p>
                         </div>
                     </div>
                     <div>
@@ -36,7 +36,7 @@ function Notifications() {
                         <div><img src="./avatar.png" alt="" className='w-16' /></div>
                         <div className='flex flex-col leading-4 '>
 
-                            <p className='text-md'><span className='font-semibold'>Dev</span> liked your post </p>
+                            <p className='md:text-md text-sm'><span className='font-semibold'>Dev</span> liked your post </p>
                         </div>
                     </div>
                     <div>
@@ -49,7 +49,7 @@ function Notifications() {
                         <div><img src="./avatar.png" alt="" className='w-16' /></div>
                         <div className='flex flex-col leading-4 '>
 
-                            <p className='text-md'><span className='font-semibold'>Kevin</span> comment on post <span>"Super post..."</span> </p>
+                            <p className='md:text-md text-sm'><span className='font-semibold'>Kevin</span> comment on post <span>"Super post..."</span> </p>
                         </div>
                     </div>
                     <div>
@@ -62,7 +62,7 @@ function Notifications() {
                         <div><img src="./avatar.png" alt="" className='w-16' /></div>
                         <div className='flex flex-col leading-4 '>
 
-                            <p className='text-md'><span className='font-semibold'>dev</span> send follow request </p>
+                            <p className='md:text-md text-sm'><span className='font-semibold'>dev</span> send follow request </p>
                         </div>
                     </div>
                     <div>
@@ -75,7 +75,7 @@ function Notifications() {
                         <div><img src="./avatar.png" alt="" className='w-16' /></div>
                         <div className='flex flex-col leading-4 '>
 
-                            <p className='text-md'><span className='font-semibold'>Kevin</span> send follow request </p>
+                            <p className='md:text-md text-sm'><span className='font-semibold'>Kevin</span> send follow request </p>
                         </div>
                     </div>
                     <div>

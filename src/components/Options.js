@@ -3,23 +3,23 @@ import { Link } from 'react-router-dom'
 
 function Options() {
   return (
-    <div className='flex flex-col gap-5 p-5 pe-20 bg-white rounded-xl'>
+    <div className='flex w-full md:w-fit gap-5 p-5 flex-row   absolute bottom-2 left-0  rounded-xl justify-around bg-white sm:static md:w-fit md:pe-20 sm:flex-col sm:w-fit sm:justify-normal z-10'>
       <Link to='/'>
         <button className='flex items-center gap-2 text-primary-color hover:text-primary-color'>
           <i className="fa-solid fa-house "></i>
-          <span>Feed</span>
+          <span className='hidden md:flex'>Feed</span>
         </button>
       </Link>
       <Link to='/inbox'>
         <button className='flex items-center gap-2 hover:text-primary-color'>
         <i class="fa-solid fa-message "></i>
-          <span>Message</span>
+          <span className='hidden md:flex'>Message</span>
         </button>
       </Link>
       <Link to='/notifications'>
         <button className='flex items-center gap-2 hover:text-primary-color'>
         <i class="fa-solid fa-envelope "></i>
-          <span>Notifications</span>
+          <span className='hidden md:flex'>Notifications</span>
         </button>
       </Link>
 
