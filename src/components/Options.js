@@ -28,6 +28,12 @@ function Options() {
           <span className='hidden md:flex'>Profile</span>
         </button>
       </Link>
+      <Link to='/login'>
+        <button className='flex items-center gap-2 hover:text-primary-color'>
+        <i class="fa-solid fa-right-from-bracket"></i>
+          <span className='hidden md:flex'>Logout</span>
+        </button>
+      </Link>
 
     </div>
   )
