@@ -1,23 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { commentAPI, deleteUserPostAPI, likeUnlikeAPI, followingPostAPI } from '../services/allAPI';
+import { commentAPI, deleteUserPostAPI, likeUnlikeAPI, followingPostAPI, userPostAPI } from '../services/allAPI';
 
-function Post({data,  data2, data3 }) {
+function UserPost({data,  data2, data3 }) {
   const [comment, setComment] = useState('');
   const [posts, setPosts] = useState([]);
 
   // Fetch following posts on component mount
   useEffect(() => {
-    fetchFollowingPosts();
+    getUserPost()
   }, []);
 
-  // Function to fetch following posts
-  const fetchFollowingPosts = async () => {
+  const getUserPost = async () => {
     try {
-      const data = await followingPostAPI();
-      setPosts(data || []);
+      const data = await userPostAPI();
+      setPosts(data || []); // Ensure posts is an array
     } catch (error) {
-      console.error('Error fetching posts:', error);
-      setPosts([]);
+      console.error("Error fetching posts:", error);
+      setPosts([]); // Set posts to an empty array in case of error
     }
   };
 
@@ -27,7 +26,7 @@ function Post({data,  data2, data3 }) {
       const response = await deleteUserPostAPI(postId);
       console.log('Delete Post Response:', response);
       // Assuming you want to refresh posts after deletion
-      fetchFollowingPosts();
+      getUserPost()
     } catch (error) {
       console.error('Error deleting post:', error);
     }
@@ -38,7 +37,7 @@ function Post({data,  data2, data3 }) {
     try {
       const response = await likeUnlikeAPI(postId);
       console.log('Like/Unlike Post Response:', response);
-      fetchFollowingPosts(); // Refresh posts after like/unlike
+      getUserPost() // Refresh posts after like/unlike
     } catch (error) {
       console.error('Error liking/unliking post:', error);
     }
@@ -50,7 +49,7 @@ function Post({data,  data2, data3 }) {
       const response = await commentAPI(postId, comment);
       console.log('Commented on post:', response);
       setComment(''); // Clear comment input after submission
-      fetchFollowingPosts(); // Refresh posts after commenting
+      getUserPost() // Refresh posts after commenting
     } catch (error) {
       console.error('Error commenting on post:', error);
     }
@@ -118,4 +117,4 @@ function Post({data,  data2, data3 }) {
   );
 }
 
-export default Post;
+export default UserPost;

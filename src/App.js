@@ -4,8 +4,9 @@ import './App.css';
 import LandingPage from './pages/LandingPage';
 import Message from './pages/Message';
 import Notification from './pages/Notification';
-import Authentication from './components/Authentication';
+
 import Profile from './pages/Profile';
+import Authentication from './pages/Authentication';
 
 function App() {
   return (

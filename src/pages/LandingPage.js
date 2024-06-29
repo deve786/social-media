@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Suggest from '../components/Suggest'
 import PostSection from '../components/PostSection'
 import LeftSection from '../components/LeftSection'
 
 function LandingPage() {
+  
+
   return (
     <div className='overflow-hidden'>
         {/* <Navbar/> */}
