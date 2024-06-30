@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { followUnfollowAPI, getSuggestAPI } from '../services/allAPI';
+import { followUnfollowAPI, getMeAPI, getSuggestAPI } from '../services/allAPI';
+import { baseURL } from '../services/baseURL';
 
 
 function Suggest() {
+    const [user, setUser] = useState({});
+
   const [suggestedFriends, setSuggestedFriends] = useState([]);
 
   // Fetch suggested friends data from API
@@ -21,7 +24,7 @@ function Suggest() {
     fetchSuggestedFriends()
     console.log(result);
   }
-
+  
 
   useEffect(() => {
     fetchSuggestedFriends();
@@ -33,8 +36,8 @@ console.log(suggestedFriends);
       
       {suggestedFriends.map((friend, index) => (
         <div key={index} className='flex items-center justify-between gap-4 cursor-pointer py-3 pe-3 hover:bg-hover-bg'>
-          <div className='flex'>
-            <div><img src={friend.profileImg || './avatar.png'} alt={friend.username} className='w-16' /></div>
+          <div className='flex items-center'>
+            <div><img src={friend.profileImg?`${baseURL}/uploads/${friend?.profileImg}`: './avatar.png'}   alt={friend.username} className='w-14 h-14 rounded-full' /></div>
             <div className='flex flex-col leading-4'>
               <h4 className='text-md'>{friend.fullName}</h4>
               <p className='text-xs text-tertiary-color'>{friend.location}</p>

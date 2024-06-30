@@ -73,6 +73,7 @@ function Post({ data2, data3 }) {
     };
     fetchUserData();
   }, []);
+  console.log(posts);
   return (
     <>
       {posts.map((post) => (
@@ -80,7 +81,7 @@ function Post({ data2, data3 }) {
           <div className='flex flex-row items-center justify-between'>
             <div className='flex flex-row gap-2'>
               <div className='flex'>
-              <img src={`${baseURL}/uploads/${user?.profileImg}`} alt="Avatar" className='w-10 h-10 rounded-full' />
+              <img src={post.user.profileImg ?`${baseURL}/uploads/${post.user?.profileImg}`:'./avatar.png'} alt="Avatar" className='w-10 h-10 rounded-full' />
               </div>
               <div className='flex flex-col leading-4'>
                 <h4 className='text-md'>{post.user.username}</h4>
@@ -105,7 +106,7 @@ function Post({ data2, data3 }) {
               <span>{post.likes.length} Likes</span>
             </div>
             <div className='flex justify-between w-full'>
-              <img src="./avatar.png" alt="" className='sm:w-16 w-10' />
+              <img src={user.profileImg ?`${baseURL}/uploads/${user?.profileImg}`:'./avatar.png'} alt="" className='sm:w-16 w-14 h-14 rounded-full' />
               <div className='relative w-full bg-gray-100 flex'>
                 <input 
                   type="text" 

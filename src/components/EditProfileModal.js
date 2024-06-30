@@ -4,7 +4,9 @@ function EditProfileModal({ user, onClose, onProfileUpdate }) {
   const [formData, setFormData] = useState({
     fullName: user.fullName || '',
     username: user.username || '',
-    bio: user.bio || ''
+    bio: user.bio || '',
+    currentPassword: '', // New state for current password
+    newPassword: ''     // New state for new password
   });
 
   const handleChange = (e) => {
@@ -54,6 +56,30 @@ function EditProfileModal({ user, onClose, onProfileUpdate }) {
               className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             ></textarea>
           </div>
+          {/* New fields for password update */}
+          <div className="mb-4">
+            <label htmlFor="currentPassword" className="block text-sm font-medium text-gray-700">Current Password</label>
+            <input
+              type="password"
+              id="currentPassword"
+              name="currentPassword"
+              value={formData.currentPassword}
+              onChange={handleChange}
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="newPassword" className="block text-sm font-medium text-gray-700">New Password</label>
+            <input
+              type="password"
+              id="newPassword"
+              name="newPassword"
+              value={formData.newPassword}
+              onChange={handleChange}
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
+          </div>
+          {/* End of new fields */}
           <div className="flex justify-end">
             <button
               type="button"

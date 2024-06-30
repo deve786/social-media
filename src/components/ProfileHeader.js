@@ -78,7 +78,7 @@ function ProfileHeader() {
             name='coverImg'
             onChange={handleCoverImageChange}
           />
-          <img src={`${baseURL}/uploads/${user?.coverImg}`} alt="Profile Cover" className="w-full h-96 object-cover" />
+          <img src={user.coverImg?`${baseURL}/uploads/${user?.coverImg}`: './post.jpg'}  alt="Profile Cover" className="w-full h-96 object-cover" />
         </label>
         <div className="w-52 rounded-full absolute bottom-0 left-0 transform translate-y-1/2">
           <label htmlFor="profileImg">
@@ -90,7 +90,7 @@ function ProfileHeader() {
               onChange={handleProfileImageChange}
             />
             <img
-              src={`${baseURL}/uploads/${user?.profileImg}`}
+              src={user.profileImg?`${baseURL}/uploads/${user?.profileImg}`: './avatar.png'} 
               alt="Avatar Image"
               className="w-20 h-20 rounded-full cursor-pointer"
             />

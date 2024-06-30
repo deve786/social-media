@@ -57,7 +57,7 @@ function PostUpload() {
     return (
         <div className='bg-white p-3 rounded-xl flex flex-col gap-3'>
             <div className='flex justify-between items-center'>
-                <img src={`${baseURL}/uploads/${user?.profileImg}`} alt="Avatar" className='w-10 h-10 rounded-full' />
+                <img src={user.profileImg?`${baseURL}/uploads/${user?.profileImg}`: './avatar.png'} alt="Avatar" className='w-10 h-10 rounded-full' />
                 <input
                     type="text"
                     className='w-full bg-gray-100 outline-none px-4 py-2 text-sm'
