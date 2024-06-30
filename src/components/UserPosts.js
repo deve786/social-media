@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { commentAPI, deleteUserPostAPI, likeUnlikeAPI, followingPostAPI, userPostAPI } from '../services/allAPI';
 
-function UserPost({data,  data2, data3 }) {
+function UserPost() {
   const [comment, setComment] = useState('');
   const [posts, setPosts] = useState([]);
 
@@ -45,14 +45,10 @@ function UserPost({data,  data2, data3 }) {
 
   // Function to handle commenting on a post
   const handleComment = async (postId) => {
-    try {
+   
       const response = await commentAPI(postId, comment);
       console.log('Commented on post:', response);
-      setComment(''); // Clear comment input after submission
-      getUserPost() // Refresh posts after commenting
-    } catch (error) {
-      console.error('Error commenting on post:', error);
-    }
+    
   };
 
   return (
@@ -66,10 +62,10 @@ function UserPost({data,  data2, data3 }) {
               </div>
               <div className='flex flex-col leading-4'>
                 <h4 className='text-md'>{post.user.username}</h4>
-                <p className='text-xs text-tertiary-color'>{post.user.updatedAt} </p>
+                <p className='text-xs text-tertiary-color'>{new Date(post.user.updatedAt).toLocaleString()} </p>
               </div>
             </div>
-            {data2 ? <div><button onClick={() => handleDeletePost(post._id)}>Delete</button></div> : ''}
+            <div><button onClick={() => handleDeletePost(post._id)}><i class="fa-solid fa-trash text-lg"></i></button></div>
           </div>
           <div className='flex gap-3 flex-col'>
             <p>{post.text}</p>

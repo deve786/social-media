@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Suggest from '../components/Suggest'
 import PostSection from '../components/PostSection'
 import LeftSection from '../components/LeftSection'

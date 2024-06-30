@@ -31,8 +31,11 @@ export const userPostAPI = async () => {
 
 // createPost
 export const createPostAPI = async (body) => {
-  return await commonRequest('POST', `${baseURL}/api/post/create`, body);
+  return await commonRequest('POST', `${baseURL}/api/post/create`, body,true);
 };
+
+
+
 
 // deleteUserPost
 export const deleteUserPostAPI = async (id) => {
@@ -77,5 +80,16 @@ export const likeUnlikeAPI = async (id) => {
 
 // comment
 export const commentAPI = async (id,body) => {
-  return await commonRequest('POST', `${baseURL}/api/post/comment/${id}`, body);
+  return await commonRequest('POST', `${baseURL}/api/posts/comment/${id}`, body);
+};
+
+
+// upadte
+// export const updateProfileAPI = async (body) => {
+//   return await commonRequest('POST', `${baseURL}/api/user/update`, body);
+// };
+
+
+export const updateProfileAPI = async (body) => {
+  return await commonRequest('POST', `${baseURL}/api/user/update`, body, true);
 };

@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { createPostAPI } from '../services/allAPI';
+import React, { useEffect, useState } from 'react';
+import { createPostAPI, getMeAPI } from '../services/allAPI';
+import { baseURL } from '../services/baseURL';
 
 function PostUpload() {
+    const [user, setUser] = useState({});
     const [text, setText] = useState('');
     const [image, setImage] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
@@ -15,9 +16,7 @@ function PostUpload() {
                 formData.append('image', image);
             }
 
-            const result=await createPostAPI(formData)
-            console.log(result);
-
+            const result = await createPostAPI(formData);
             console.log('Post uploaded:', result);
             // Optionally reset state after successful upload
             setText('');
@@ -42,10 +41,23 @@ function PostUpload() {
         }
     };
 
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const data = await getMeAPI();
+                setUser(data || {});
+            } catch (error) {
+                console.error("Error fetching user data:", error);
+                setUser({});
+            }
+        };
+        fetchUserData();
+    }, []);
     return (
         <div className='bg-white p-3 rounded-xl flex flex-col gap-3'>
             <div className='flex justify-between items-center'>
-                <img src="./avatar.png" alt="Avatar" className='w-16 rounded-full' />
+                <img src={`${baseURL}/uploads/${user?.profileImg}`} alt="Avatar" className='w-10 h-10 rounded-full' />
                 <input
                     type="text"
                     className='w-full bg-gray-100 outline-none px-4 py-2 text-sm'

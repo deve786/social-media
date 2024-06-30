@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { commentAPI, deleteUserPostAPI, likeUnlikeAPI, followingPostAPI } from '../services/allAPI';
+import { commentAPI, deleteUserPostAPI, likeUnlikeAPI, followingPostAPI, getMeAPI } from '../services/allAPI';
+import { baseURL } from '../services/baseURL';
 
-function Post({data,  data2, data3 }) {
+function Post({ data2, data3 }) {
   const [comment, setComment] = useState('');
   const [posts, setPosts] = useState([]);
-
+  const [user, setUser] = useState({});
   // Fetch following posts on component mount
   useEffect(() => {
     fetchFollowingPosts();
@@ -26,8 +27,7 @@ function Post({data,  data2, data3 }) {
     try {
       const response = await deleteUserPostAPI(postId);
       console.log('Delete Post Response:', response);
-      // Assuming you want to refresh posts after deletion
-      fetchFollowingPosts();
+      fetchFollowingPosts(); // Refresh posts after deletion
     } catch (error) {
       console.error('Error deleting post:', error);
     }
@@ -45,8 +45,9 @@ function Post({data,  data2, data3 }) {
   };
 
   // Function to handle commenting on a post
-  const handleComment = async (postId) => {
+  const handleComment = async (postId,comment) => {
     try {
+      console.log("comment... ", comment); 
       const response = await commentAPI(postId, comment);
       console.log('Commented on post:', response);
       setComment(''); // Clear comment input after submission
@@ -56,21 +57,37 @@ function Post({data,  data2, data3 }) {
     }
   };
 
+  // Function to handle input changes
+  const handleInputChange = (e) => {
+    setComment(e.target.value);
+  };
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const data = await getMeAPI();
+        setUser(data || {});
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+        setUser({});
+      }
+    };
+    fetchUserData();
+  }, []);
   return (
     <>
       {posts.map((post) => (
         <div key={post._id} className='bg-white p-3 w-[100%] flex flex-col gap-3 rounded-xl'>
           <div className='flex flex-row items-center justify-between'>
-            <div className='flex flex-row'>
+            <div className='flex flex-row gap-2'>
               <div className='flex'>
-                <img src="./avatar.png" alt="" className='w-16' />
+              <img src={`${baseURL}/uploads/${user?.profileImg}`} alt="Avatar" className='w-10 h-10 rounded-full' />
               </div>
               <div className='flex flex-col leading-4'>
                 <h4 className='text-md'>{post.user.username}</h4>
-                <p className='text-xs text-tertiary-color'>{post.user.updatedAt} </p>
+                <p className='text-xs text-tertiary-color'>{new Date(post.updatedAt).toLocaleString()}</p>
               </div>
             </div>
-            {data2 ? <div><button onClick={() => handleDeletePost(post._id)}>Delete</button></div> : ''}
+           
           </div>
           <div className='flex gap-3 flex-col'>
             <p>{post.text}</p>
@@ -87,13 +104,20 @@ function Post({data,  data2, data3 }) {
               </span>
               <span>{post.likes.length} Likes</span>
             </div>
-            <div className='flex justify-between  w-full'>
+            <div className='flex justify-between w-full'>
               <img src="./avatar.png" alt="" className='sm:w-16 w-10' />
               <div className='relative w-full bg-gray-100 flex'>
-                <input type="text" className='w-full bg-transparent outline-none px-4 py-2 text-sm' value={comment} onChange={(e) => setComment(e.target.value)} placeholder="Add a comment..." />
+                <input 
+                  type="text" 
+                  className='w-full bg-transparent outline-none px-4 py-2 text-sm' 
+                  name='text' 
+                  value={comment} 
+                  onChange={handleInputChange} 
+                  placeholder="Add a comment..." 
+                />
                 <i className="far fa-smile text-xl cursor-pointer absolute top-1/2 transform -translate-y-1/2 right-4"></i>
               </div>
-              <button className='ml-3' onClick={() => handleComment(post._id)}>
+              <button className='ml-3' onClick={() => handleComment(post._id,comment)}>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6 text-primary-color">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
                 </svg>
