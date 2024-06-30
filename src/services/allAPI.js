@@ -9,8 +9,14 @@ export const loginAPI = async (body) => {
     return await commonRequest('POST', `${baseURL}/api/auth/signin`, body);
 };
 
+// get Notification
 export const getNotificationsAPI = async () => {
     return await commonRequest('GET', `${baseURL}/api/notifications`, {});
+};
+
+// delete Notification
+export const deleteNotificationsAPI = async () => {
+  return await commonRequest('DELETE', `${baseURL}/api/notifications`, {});
 };
 
 // allPost

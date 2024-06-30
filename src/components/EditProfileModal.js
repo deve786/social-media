@@ -16,11 +16,12 @@ function EditProfileModal({ user, onClose, onProfileUpdate }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    onClose()
     onProfileUpdate(formData);
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
+    <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-10">
       <div className="bg-white rounded-xl p-6">
         <h2 className="text-2xl font-bold mb-4">Edit Profile</h2>
         <form onSubmit={handleSubmit}>
@@ -32,7 +33,7 @@ function EditProfileModal({ user, onClose, onProfileUpdate }) {
               name="fullName"
               value={formData.fullName}
               onChange={handleChange}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm  sm:text-sm"
             />
           </div>
           <div className="mb-4">

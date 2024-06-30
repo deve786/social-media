@@ -43,6 +43,22 @@ function Options() {
           <span className='hidden md:flex'>Profile</span>
         </button>
       </Link>
+      <div className='sm:hidden'>
+        <Link to='/suggest'>
+          <button className='flex items-center gap-2 hover:text-primary-color'>
+          <i className='fa-solid fa-user-plus'></i>
+            <span className='hidden md:flex'>Profile</span>
+          </button>
+        </Link>
+      </div>
+      <div className='sm:hidden'>
+        <Link to='/friends'>
+          <button className='flex items-center gap-2 hover:text-primary-color'>
+          <i className='fa-solid fa-user-minus'></i>
+            <span className='hidden md:flex'>Profile</span>
+          </button>
+        </Link>
+      </div>
       <button onClick={handleLogout} className='flex items-center gap-2 hover:text-primary-color'>
         <i className="fa-solid fa-right-from-bracket"></i>
         <span className='hidden md:flex'>Logout</span>
