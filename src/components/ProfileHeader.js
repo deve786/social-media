@@ -22,7 +22,7 @@ function ProfileHeader() {
     }
   };
   useEffect(() => {
-    
+
     fetchUserData();
   }, []);
 
@@ -66,7 +66,7 @@ function ProfileHeader() {
     formData.append('coverImg', file);
 
     try {
-      const data=await updateProfileAPI(formData);
+      const data = await updateProfileAPI(formData);
       toast.success("cover image updated");
       console.log(data);
 
@@ -88,9 +88,9 @@ function ProfileHeader() {
             name='coverImg'
             onChange={handleCoverImageChange}
           />
-          <div className='bg-slate-600'><img src={user.coverImg?`${baseURL}/uploads/${user?.coverImg}`: './post.jpg'}  alt="Profile Cover" className="w-full h-96 object-cover  border border-black rounded" /></div>
+          <div className='bg-slate-600'><img src={user.coverImg ? `${baseURL}/uploads/${user?.coverImg}` : './post.jpg'} alt="Profile Cover" className="w-full h-96 object-cover  border border-black rounded" /></div>
         </label>
-        <div className="w-52 rounded-full absolute bottom-0 left-0 transform translate-y-1/2">
+        <div className="w-52 rounded-full absolute bottom-0 left-5 transform translate-y-1/2">
           <label htmlFor="profileImg">
             <input
               type="file"
@@ -100,7 +100,7 @@ function ProfileHeader() {
               onChange={handleProfileImageChange}
             />
             <img
-              src={user.profileImg?`${baseURL}/uploads/${user?.profileImg}`: './avatar.png'} 
+              src={user.profileImg ? `${baseURL}/uploads/${user?.profileImg}` : './avatar.png'}
               alt="Avatar Image"
               className="w-20 h-20 rounded-full cursor-pointer border"
             />
@@ -112,7 +112,7 @@ function ProfileHeader() {
         <div className='flex justify-between'>
           <h3>{user.fullName}</h3>
           <button
-            className='bg-white border-slate-950 border px-2 rounded-xl text-sm md:text-md md:px-4 md:py-1'
+            className='bg-white border-slate-950 border px-2 rounded-xl text-sm md:text-md md:px-4 md:py-1 sm:block hidden'
             onClick={() => {
               setIsModalOpen(true);
               setUpdateType('profileFields'); // Set update type to profile fields
@@ -120,6 +120,14 @@ function ProfileHeader() {
           >
             Edit Profile
           </button>
+          <button
+            className='bg-white border-slate-950 border px-2 rounded text-sm md:text-md md:px-4 md:py-1 sm:hidden block'
+            onClick={() => {
+              setIsModalOpen(true);
+              setUpdateType('profileFields'); // Set update type to profile fields
+            }}
+          >
+            <i class="fa-solid fa-pen-to-square"></i>          </button>
         </div>
         <div>
           <div className='flex md:gap-10 md:flex-row flex-col gap-2'>
