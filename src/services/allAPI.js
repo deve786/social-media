@@ -80,7 +80,7 @@ export const likeUnlikeAPI = async (id) => {
 
 // comment
 export const commentAPI = async (id,body) => {
-  return await commonRequest('POST', `${baseURL}/api/posts/comment/${id}`, body);
+  return await commonRequest('POST', `${baseURL}/api/post/comment/${id}`, body);
 };
 
 

@@ -6,8 +6,8 @@ function FriendsList() {
   const [friends, setFriends] = useState([]);
 
   const handleFollowUnfollow = async (id) => {
-    const result = await followUnfollowAPI(id)
-    fetchFriendsList()
+    const result = await followUnfollowAPI(id);
+    fetchFriendsList();
     console.log(result);
   }
 
@@ -19,9 +19,8 @@ function FriendsList() {
       console.error('Error fetching friends:', error);
     }
   };
-  useEffect(() => {
-    
 
+  useEffect(() => {
     fetchFriendsList();
   }, []);
 
@@ -30,19 +29,20 @@ function FriendsList() {
       <h3 className='mb-3'>My Friends</h3>
       <div className='flex flex-col '>
         {friends.map((friend) => (
-          <div key={friend._id} className='flex items-center justify-start cursor-pointer py-3 pe-3 hover:bg-hover-bg'>
-            <div className='flex justify-between '>
-              <div className='flex px-6 items-center gap-2'>
-                <div><img src={friend.profileImg?`${baseURL}/uploads/${friend?.profileImg}`: './avatar.png'}   alt={friend.username} className='w-14 h-14 rounded-full' /></div>
-                <div className='flex flex-col leading-4 '>
-                  <h4 className='text-md'>{friend.fullName}</h4>
-                  <p className='text-xs text-tertiary-color'>{friend.username || 'Location not specified'}</p>
-                </div>
-                <div className='items-end items-center'>
-                <button onClick={()=>handleFollowUnfollow(friend._id)}><i class="fa-solid fa-user-minus"></i></button>
+          <div key={friend._id} className='flex items-center justify-between cursor-pointer py-3 pe-3 hover:bg-hover-bg'>
+            <div className='flex items-center gap-2 px-6'>
+              <div>
+                <img src={friend.profileImg ? `${baseURL}/uploads/${friend.profileImg}` : './avatar.png'} alt={friend.username} className='w-10 h-10 rounded-full' />
               </div>
+              <div className='flex flex-col leading-4'>
+                <h4 className='text-md'>{friend.fullName}</h4>
+                <p className='text-xs text-tertiary-color'>{friend.username || 'Location not specified'}</p>
               </div>
-              
+            </div>
+            <div>
+              <button onClick={() => handleFollowUnfollow(friend._id)} className=' hover:text-primary-color'>
+                <i className="fa-solid fa-user-minus"></i>
+              </button>
             </div>
           </div>
         ))}

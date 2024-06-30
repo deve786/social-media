@@ -1,71 +1,84 @@
 import React, { useEffect, useState } from 'react';
-import { commentAPI, deleteUserPostAPI, likeUnlikeAPI, followingPostAPI, userPostAPI } from '../services/allAPI';
+import { commentAPI, deleteUserPostAPI, likeUnlikeAPI, userPostAPI } from '../services/allAPI';
+import { baseURL } from '../services/baseURL';
 
 function UserPost() {
   const [comment, setComment] = useState('');
   const [posts, setPosts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  // Fetch following posts on component mount
+  // Fetch user posts on component mount
   useEffect(() => {
-    getUserPost()
+    getUserPost();
   }, []);
 
   const getUserPost = async () => {
+    setIsLoading(true);
     try {
       const data = await userPostAPI();
-      setPosts(data || []); // Ensure posts is an array
+      setPosts(data || []);
     } catch (error) {
       console.error("Error fetching posts:", error);
-      setPosts([]); // Set posts to an empty array in case of error
+      setPosts([]);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  // Function to handle deleting a post
   const handleDeletePost = async (postId) => {
     try {
       const response = await deleteUserPostAPI(postId);
       console.log('Delete Post Response:', response);
-      // Assuming you want to refresh posts after deletion
-      getUserPost()
+      getUserPost();
     } catch (error) {
       console.error('Error deleting post:', error);
     }
   };
 
-  // Function to handle liking/unliking a post
   const handleLikeUnlike = async (postId) => {
     try {
       const response = await likeUnlikeAPI(postId);
       console.log('Like/Unlike Post Response:', response);
-      getUserPost() // Refresh posts after like/unlike
+      getUserPost();
     } catch (error) {
       console.error('Error liking/unliking post:', error);
     }
   };
 
-  // Function to handle commenting on a post
   const handleComment = async (postId) => {
-   
-      const response = await commentAPI(postId, comment);
+    try {
+      const response = await commentAPI(postId, { text: comment });
       console.log('Commented on post:', response);
-    
+      setComment('');
+      getUserPost();
+    } catch (error) {
+      console.error('Error commenting on post:', error);
+    }
   };
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <>
       {posts.map((post) => (
         <div key={post._id} className='bg-white p-3 w-[100%] flex flex-col gap-3 rounded-xl'>
           <div className='flex flex-row items-center justify-between'>
-            <div className='flex flex-row'>
+            <div className='flex flex-row gap-2'>
               <div className='flex'>
-                <img src="./avatar.png" alt="" className='w-16' />
+                <img src={post.user.profileImg ? `${baseURL}/uploads/${post.user.profileImg}` : './avatar.png'} alt="" className='w-10 h-10 rounded-full' />
               </div>
               <div className='flex flex-col leading-4'>
                 <h4 className='text-md'>{post.user.username}</h4>
                 <p className='text-xs text-tertiary-color'>{new Date(post.user.updatedAt).toLocaleString()} </p>
               </div>
             </div>
-            <div><button onClick={() => handleDeletePost(post._id)}><i class="fa-solid fa-trash text-lg"></i></button></div>
+            <div>
+              <button onClick={() => handleDeletePost(post._id)}>
+                <i className="fa-solid fa-trash text-lg"></i>
+              </button>
+            </div>
           </div>
           <div className='flex gap-3 flex-col'>
             <p>{post.text}</p>
@@ -73,7 +86,6 @@ function UserPost() {
           </div>
           {/* Comment section */}
           <div>
-            {/* Input for adding new comment */}
             <div className='m-2 flex gap-2 items-center'>
               <span>
                 <button onClick={() => handleLikeUnlike(post._id)}>
@@ -82,8 +94,8 @@ function UserPost() {
               </span>
               <span>{post.likes.length} Likes</span>
             </div>
-            <div className='flex justify-between  w-full'>
-              <img src="./avatar.png" alt="" className='sm:w-16 w-10' />
+            <div className='flex justify-between w-full gap-2'>
+              <img src={post.user.profileImg ? `${baseURL}/uploads/${post.user.profileImg}` : './avatar.png'} alt="" className='h-10 w-10 rounded-full' />
               <div className='relative w-full bg-gray-100 flex'>
                 <input type="text" className='w-full bg-transparent outline-none px-4 py-2 text-sm' value={comment} onChange={(e) => setComment(e.target.value)} placeholder="Add a comment..." />
                 <i className="far fa-smile text-xl cursor-pointer absolute top-1/2 transform -translate-y-1/2 right-4"></i>
@@ -97,10 +109,11 @@ function UserPost() {
             {/* Display comments */}
             <div>
               <div className='flex justify-start flex-col ms-10'>
-                <h2>Comments</h2>
-                {post.comments.map((comment, index) => (
-                  <div key={index} className='flex items-center mb-2'>
-                    <img src="./avatar.png" alt="" className='w-14 rounded-full' />
+                <h2 className='text-sm font-semibold mt-2'>Comments</h2>
+                {console.log( posts)}
+                {post.comments && post.comments.map((comment, index) => (
+                  <div key={index} className='flex items-center mb-2 gap-2'>
+                    <img src={comment.user.profileImg ?`${baseURL}/uploads/${comment.user?.profileImg}`:'./avatar.png'} alt="" className='w-8 h-8 rounded-full' />
                     <p className='text-sm'>{comment.text}</p>
                   </div>
                 ))}

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getNotificationsAPI } from '../services/allAPI';
+import { baseURL } from '../services/baseURL';
 
 function Notifications() {
   const [notifications, setNotifications] = useState([]);
@@ -24,9 +25,9 @@ console.log(notifications);
         {notifications.length > 0 ? (
           notifications.map(notification => (
             <div key={notification._id} className='flex justify-between cursor-pointer py-3 pe-3 hover:bg-hover-bg'>
-              <div className='flex items-center'>
+              <div className='flex items-center gap-2'>
                 <div>
-                  <img src= './avatar.png' alt="" className='w-16' />
+                  <img src= {notification.from.profileImg ?`${baseURL}/uploads/${notification.from?.profileImg}`:'./avatar.png'} alt="" className='w-10 h-10 rounded-full' />
                 </div>
                 <div className='flex flex-col leading-4'>
                   <p className='md:text-md text-sm'>

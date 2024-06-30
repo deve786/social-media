@@ -45,13 +45,12 @@ function Post({ data2, data3 }) {
   };
 
   // Function to handle commenting on a post
-  const handleComment = async (postId,comment) => {
+  const handleComment = async (postId) => {
     try {
-      console.log("comment... ", comment); 
-      const response = await commentAPI(postId, comment);
+      const response = await commentAPI(postId, { text: comment });
       console.log('Commented on post:', response);
-      setComment(''); // Clear comment input after submission
-      fetchFollowingPosts(); // Refresh posts after commenting
+      setComment('');
+      fetchFollowingPosts();
     } catch (error) {
       console.error('Error commenting on post:', error);
     }
@@ -105,8 +104,8 @@ function Post({ data2, data3 }) {
               </span>
               <span>{post.likes.length} Likes</span>
             </div>
-            <div className='flex justify-between w-full'>
-              <img src={user.profileImg ?`${baseURL}/uploads/${user?.profileImg}`:'./avatar.png'} alt="" className='sm:w-16 w-14 h-14 rounded-full' />
+            <div className='flex justify-between w-full gap-2'>
+              <img src={user.profileImg ?`${baseURL}/uploads/${user?.profileImg}`:'./avatar.png'} alt="" className=' w-10 h-10 rounded-full' />
               <div className='relative w-full bg-gray-100 flsx'>
                 <input 
                   type="text" 
@@ -129,8 +128,8 @@ function Post({ data2, data3 }) {
               <div className='flex justify-start flex-col ms-10'>
                 <h2>Comments</h2>
                 {post.comments.map((comment, index) => (
-                  <div key={index} className='flex items-center mb-2'>
-                    <img src="./avatar.png" alt="" className='w-14 rounded-full' />
+                  <div key={index} className='flex items-center mb-2 gap-2'>
+                    <img src={comment.user.profileImg ?`${baseURL}/uploads/${comment.user?.profileImg}`:'./avatar.png'} alt="" className='w-8 h-8 rounded-full' />
                     <p className='text-sm'>{comment.text}</p>
                   </div>
                 ))}
