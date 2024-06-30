@@ -107,7 +107,7 @@ function Post({ data2, data3 }) {
             </div>
             <div className='flex justify-between w-full'>
               <img src={user.profileImg ?`${baseURL}/uploads/${user?.profileImg}`:'./avatar.png'} alt="" className='sm:w-16 w-14 h-14 rounded-full' />
-              <div className='relative w-full bg-gray-100 flex'>
+              <div className='relative w-full bg-gray-100 flesx'>
                 <input 
                   type="text" 
                   className='w-full bg-transparent outline-none px-4 py-2 text-sm' 
