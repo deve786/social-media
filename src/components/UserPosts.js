@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { commentAPI, deleteUserPostAPI, likeUnlikeAPI, userPostAPI } from '../services/allAPI';
+import { commentAPI, deleteUserPostAPI, getMeAPI, likeUnlikeAPI, userPostAPI } from '../services/allAPI';
 import { baseURL } from '../services/baseURL';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -8,7 +8,8 @@ import 'react-toastify/dist/ReactToastify.css';
 function UserPost() {
   const [comment, setComment] = useState('');
   const [posts, setPosts] = useState([]);
- 
+  const [user, setUser] = useState({});
+
 
   // Fetch user posts on component mount
   useEffect(() => {
@@ -16,7 +17,7 @@ function UserPost() {
   }, []);
 
   const getUserPost = async () => {
-  
+
     try {
       const data = await userPostAPI();
       setPosts(data || []);
@@ -24,7 +25,7 @@ function UserPost() {
       console.error("Error fetching posts:", error);
       setPosts([]);
     } finally {
-    
+
     }
   };
 
@@ -61,12 +62,30 @@ function UserPost() {
     }
   };
 
-  
-console.log(posts);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const data = await getMeAPI();
+        setUser(data || {});
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+        setUser({});
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+
+  console.log(posts);
   return (
     <>
-      {posts.map((post) => (
-        <div key={post._id} className='bg-white p-3 w-[100%] flex flex-col gap-3 rounded-xl'>
+      {posts.map((post) => {
+        const userId = user._id;
+        const isLiked = post.likes.includes(userId);
+
+        return (<div key={post._id} className='bg-white p-3 w-[100%] flex flex-col gap-3 rounded-xl'>
           <div className='flex flex-row items-center justify-between'>
             <div className='flex flex-row gap-2'>
               <div className='flex'>
@@ -92,7 +111,7 @@ console.log(posts);
             <div className='m-2 flex gap-2 items-center'>
               <span>
                 <button onClick={() => handleLikeUnlike(post._id)}>
-                  <i className={post.likes.length > 0 ? 'fa-solid fa-heart text-primary-color text-lg cursor-pointer' : 'fa-regular fa-heart text-lg cursor-pointer'}></i>
+                <i className={isLiked ? 'fa-solid fa-heart text-primary-color text-lg cursor-pointer' : 'fa-regular fa-heart text-lg cursor-pointer'}></i>
                 </button>
               </span>
               <span>{post.likes.length} Likes</span>
@@ -113,18 +132,18 @@ console.log(posts);
             <div>
               <div className='flex justify-start flex-col ms-10'>
                 <h2 className='text-sm font-semibold mt-2'>Comments</h2>
-                {console.log( posts)}
+                {console.log(posts)}
                 {post.comments && post.comments.map((comment, index) => (
                   <div key={index} className='flex items-center mb-2 gap-2'>
-                    <img src={comment.user.profileImg ?`${baseURL}/uploads/${comment.user?.profileImg}`:'./avatar.png'} alt="" className='w-8 h-8 rounded-full' />
+                    <img src={comment.user.profileImg ? `${baseURL}/uploads/${comment.user?.profileImg}` : './avatar.png'} alt="" className='w-8 h-8 rounded-full' />
                     <p className='text-sm'>{comment.text}</p>
                   </div>
                 ))}
               </div>
             </div>
           </div>
-        </div>
-      ))}
+        </div>)
+      })}
     </>
   );
 }
