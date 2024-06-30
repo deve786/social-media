@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { deleteNotificationsAPI, getNotificationsAPI } from '../services/allAPI';
 import { baseURL } from '../services/baseURL';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function Notifications() {
   const [notifications, setNotifications] = useState([]);
@@ -16,13 +19,14 @@ function Notifications() {
 
   const handleDelete = async () => {
     try {
-      const data = await deleteNotificationsAPI()
-      console.log(data);
-      fetchAllNotifications()
+      await deleteNotificationsAPI();
+      fetchAllNotifications();
+      toast.success("Notifications deleted successfully");
     } catch (error) {
       console.error("Error deleting notifications:", error);
+      toast.error("Failed to delete notifications");
     }
-  }
+  };
 
   useEffect(() => {
     fetchAllNotifications();

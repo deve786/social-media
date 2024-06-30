@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { commentAPI, deleteUserPostAPI, likeUnlikeAPI, userPostAPI } from '../services/allAPI';
 import { baseURL } from '../services/baseURL';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function UserPost() {
   const [comment, setComment] = useState('');
   const [posts, setPosts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+ 
 
   // Fetch user posts on component mount
   useEffect(() => {
@@ -13,7 +16,7 @@ function UserPost() {
   }, []);
 
   const getUserPost = async () => {
-    setIsLoading(true);
+  
     try {
       const data = await userPostAPI();
       setPosts(data || []);
@@ -21,17 +24,19 @@ function UserPost() {
       console.error("Error fetching posts:", error);
       setPosts([]);
     } finally {
-      setIsLoading(false);
+    
     }
   };
 
   const handleDeletePost = async (postId) => {
     try {
       const response = await deleteUserPostAPI(postId);
-      console.log('Delete Post Response:', response);
+      toast.success("Post deleted successfully");
       getUserPost();
     } catch (error) {
       console.error('Error deleting post:', error);
+      toast.error("Error deleting post");
+
     }
   };
 
@@ -56,10 +61,8 @@ function UserPost() {
     }
   };
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
+  
+console.log(posts);
   return (
     <>
       {posts.map((post) => (
@@ -71,7 +74,7 @@ function UserPost() {
               </div>
               <div className='flex flex-col leading-4'>
                 <h4 className='text-md'>{post.user.username}</h4>
-                <p className='text-xs text-tertiary-color'>{new Date(post.user.updatedAt).toLocaleString()} </p>
+                <p className='text-xs text-tertiary-color'>{new Date(post.createdAt).toLocaleString()} </p>
               </div>
             </div>
             <div>
@@ -82,7 +85,7 @@ function UserPost() {
           </div>
           <div className='flex gap-3 flex-col'>
             <p>{post.text}</p>
-            <img src="./post.jpg" alt="" className='w-full rounded' />
+            <img src={`${baseURL}/${post.img}`} alt="" className='w-full rounded' />
           </div>
           {/* Comment section */}
           <div>

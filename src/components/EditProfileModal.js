@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function EditProfileModal({ user, onClose, onProfileUpdate }) {
   const [formData, setFormData] = useState({
@@ -16,13 +19,22 @@ function EditProfileModal({ user, onClose, onProfileUpdate }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onClose()
-    onProfileUpdate(formData);
+
+    try {
+      onProfileUpdate(formData);
+      toast.success("Updated successfully");
+      onClose()
+    }catch(error){
+      console.error("Error updating user:", error);
+      toast.error("Failed to updating user");
+    }
   };
+
+  
 
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-10">
-      <div className="bg-white rounded-xl p-6">
+      <div className="bg-white rounded-xl p-6 md:w-[50%] w-[80%]">
         <h2 className="text-2xl font-bold mb-4">Edit Profile</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -33,7 +45,7 @@ function EditProfileModal({ user, onClose, onProfileUpdate }) {
               name="fullName"
               value={formData.fullName}
               onChange={handleChange}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm  sm:text-sm"
+              className="mt-1 block w-full outline-none border px-3 py-1 rounded-md shadow-sm  sm:text-sm"
             />
           </div>
           <div className="mb-4">
@@ -44,7 +56,7 @@ function EditProfileModal({ user, onClose, onProfileUpdate }) {
               name="username"
               value={formData.username}
               onChange={handleChange}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="mt-1 block w-full outline-none border px-3 py-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             />
           </div>
           <div className="mb-4">
@@ -54,7 +66,7 @@ function EditProfileModal({ user, onClose, onProfileUpdate }) {
               name="bio"
               value={formData.bio}
               onChange={handleChange}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="mt-1 block w-full outline-none border px-3 py-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             ></textarea>
           </div>
           {/* New fields for password update */}
@@ -66,7 +78,7 @@ function EditProfileModal({ user, onClose, onProfileUpdate }) {
               name="currentPassword"
               value={formData.currentPassword}
               onChange={handleChange}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="mt-1 block w-full outline-none border px-3 py-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             />
           </div>
           <div className="mb-4">
@@ -77,7 +89,7 @@ function EditProfileModal({ user, onClose, onProfileUpdate }) {
               name="newPassword"
               value={formData.newPassword}
               onChange={handleChange}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="mt-1 block w-full outline-none border px-3 py-1 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             />
           </div>
           {/* End of new fields */}

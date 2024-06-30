@@ -7,11 +7,11 @@ function ProfilePost() {
 
 
   return (
-    <div className="flex-1 gap-3 flex flex-col px-5  pb-5 md:px-10">
+    
 
       <UserPost />
 
-    </div>
+    
   );
 }
 

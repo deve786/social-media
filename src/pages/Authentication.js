@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { loginAPI, registerAPI } from '../services/allAPI';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function Authentication({ register }) {
     const [inputs, setInputs] = useState({
@@ -10,7 +13,6 @@ function Authentication({ register }) {
         password: ''
     });
 
-    const [authUser, setAuthUser] = useState(null);
     const navigate = useNavigate();
 
     const handleInput = (e) => {
@@ -22,17 +24,17 @@ function Authentication({ register }) {
         const { username, fullName, email, password } = inputs;
         try {
             if (!username || !fullName || !email || !password) {
-                alert("Enter all inputs");
-            } else {
-                const result = await registerAPI(inputs);
-                localStorage.setItem('token', result.data.token);
-                setAuthUser(result.data.user);
-                alert("Register successful");
-                navigate('/');
+                toast.error("Please enter all inputs");
+                return;
             }
+
+            const result = await registerAPI(inputs);
+            localStorage.setItem('token', result.data.token);
+            toast.success("Registration successful");
+            navigate('/');
         } catch (error) {
-            console.log(error);
-            alert("Registration failed");
+            console.error("Registration failed:", error);
+            toast.error("Registration failed");
         }
     };
 
@@ -40,19 +42,20 @@ function Authentication({ register }) {
         const { username, password } = inputs;
         try {
             if (!username || !password) {
-                alert("Enter all inputs");
-            } else {
-                const result = await loginAPI(inputs);
-                console.log(result);
-                localStorage.setItem('token', result.token);
-                setAuthUser(result.user);
-                console.log(result.user);
-                alert("Login successful");
-                navigate('/');
+                toast.error("Please enter all inputs");
+                return;
             }
+
+            const result = await loginAPI(inputs);
+            localStorage.setItem('token', result.token);
+            console.log("Asdasd");
+            navigate('/');
+            toast.success("Login successfully");
+
+            
         } catch (error) {
-            console.log(error);
-            alert("Login failed");
+            console.error("Login failed:", error);
+            toast.error("Login failed");
         }
     };
 
@@ -97,6 +100,7 @@ function Authentication({ register }) {
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     );
 }

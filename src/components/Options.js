@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { logoutAPI } from '../services/allAPI';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Options() {
   const navigate = useNavigate();
@@ -9,11 +11,13 @@ function Options() {
     try {
       await logoutAPI();
       localStorage.removeItem('token'); // Clear the token from localStorage
-      alert("Logged out successfully");
+      toast.error("Registration failed");
+      toast.success("Logged out successfully");
+      console.log("Logged out successfully"); // Check if this log appears
       navigate('/login'); // Redirect to the login page or any other appropriate page
     } catch (error) {
       console.error("Error during logout:", error);
-      alert("Logout failed");
+      toast.error("Logout failed"); // Display error toast
     }
   };
 
@@ -46,16 +50,16 @@ function Options() {
       <div className='sm:hidden'>
         <Link to='/suggest'>
           <button className='flex items-center gap-2 hover:text-primary-color'>
-          <i className='fa-solid fa-user-plus'></i>
-            <span className='hidden md:flex'>Profile</span>
+            <i className='fa-solid fa-user-plus'></i>
+            <span className='hidden md:flex'>Suggest</span>
           </button>
         </Link>
       </div>
       <div className='sm:hidden'>
         <Link to='/friends'>
           <button className='flex items-center gap-2 hover:text-primary-color'>
-          <i className='fa-solid fa-user-minus'></i>
-            <span className='hidden md:flex'>Profile</span>
+            <i className='fa-solid fa-user-minus'></i>
+            <span className='hidden md:flex'>Friends</span>
           </button>
         </Link>
       </div>
@@ -63,6 +67,7 @@ function Options() {
         <i className="fa-solid fa-right-from-bracket"></i>
         <span className='hidden md:flex'>Logout</span>
       </button>
+      <ToastContainer /> {/* Place ToastContainer at the end of the component */}
     </div>
   );
 }

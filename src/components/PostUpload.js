@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { createPostAPI, getMeAPI } from '../services/allAPI';
 import { baseURL } from '../services/baseURL';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function PostUpload() {
     const [user, setUser] = useState({});
@@ -12,12 +14,21 @@ function PostUpload() {
         try {
             const formData = new FormData();
             formData.append('text', text);
+            
             if (image) {
-                formData.append('image', image);
+                formData.append('img', image);
+            }
+            
+            // Log the FormData content
+            for (let [key, value] of formData.entries()) {
+                console.log(key, value);
             }
 
             const result = await createPostAPI(formData);
             console.log('Post uploaded:', result);
+            toast.success("Post uploaded successfully");
+
+
             // Optionally reset state after successful upload
             setText('');
             setImage(null);
@@ -41,7 +52,6 @@ function PostUpload() {
         }
     };
 
-
     useEffect(() => {
         const fetchUserData = async () => {
             try {
@@ -54,10 +64,11 @@ function PostUpload() {
         };
         fetchUserData();
     }, []);
+
     return (
         <div className='bg-white p-3 rounded-xl flex flex-col gap-3'>
             <div className='flex justify-between items-center'>
-                <img src={user.profileImg?`${baseURL}/uploads/${user?.profileImg}`: './avatar.png'} alt="Avatar" className='w-10 h-10 rounded-full' />
+                <img src={user.profileImg ? `${baseURL}/uploads/${user?.profileImg}` : './avatar.png'} alt="Avatar" className='w-10 h-10 rounded-full' />
                 <input
                     type="text"
                     className='w-full bg-gray-100 outline-none px-4 py-2 text-sm'
@@ -77,6 +88,7 @@ function PostUpload() {
                         accept='image/*'
                         onChange={handleImageChange}
                         style={{ display: 'none' }}
+                        name='img'
                     />
                     <i className="fa-regular fa-face-smile text-xl cursor-pointer"></i>
                 </div>

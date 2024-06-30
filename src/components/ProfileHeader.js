@@ -3,6 +3,10 @@ import { getMeAPI, updateProfileAPI } from '../services/allAPI';
 import EditProfileModal from './EditProfileModal';
 import { baseURL } from '../services/baseURL';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 function ProfileHeader() {
   const [user, setUser] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -46,9 +50,11 @@ function ProfileHeader() {
 
     try {
       await updateProfileAPI(formData);
+      toast.success("Profile Image updated");
       fetchUserData(); // Refresh user data after update
     } catch (error) {
       console.error("Error updating profile image:", error);
+      toast.error("error in profile image updating");
     }
   };
 
@@ -60,10 +66,14 @@ function ProfileHeader() {
     formData.append('coverImg', file);
 
     try {
-      await updateProfileAPI(formData);
+      const data=await updateProfileAPI(formData);
+      toast.success("cover image updated");
+      console.log(data);
+
       fetchUserData(); // Refresh user data after update
     } catch (error) {
       console.error("Error updating cover image:", error);
+      toast.error("error cover image updating");
     }
   };
 
@@ -78,7 +88,7 @@ function ProfileHeader() {
             name='coverImg'
             onChange={handleCoverImageChange}
           />
-          <img src={user.coverImg?`${baseURL}/uploads/${user?.coverImg}`: './post.jpg'}  alt="Profile Cover" className="w-full h-96 object-cover" />
+          <div className='bg-slate-600'><img src={user.coverImg?`${baseURL}/uploads/${user?.coverImg}`: './post.jpg'}  alt="Profile Cover" className="w-full h-96 object-cover  border border-black rounded" /></div>
         </label>
         <div className="w-52 rounded-full absolute bottom-0 left-0 transform translate-y-1/2">
           <label htmlFor="profileImg">
@@ -92,7 +102,7 @@ function ProfileHeader() {
             <img
               src={user.profileImg?`${baseURL}/uploads/${user?.profileImg}`: './avatar.png'} 
               alt="Avatar Image"
-              className="w-20 h-20 rounded-full cursor-pointer"
+              className="w-20 h-20 rounded-full cursor-pointer border"
             />
           </label>
         </div>
