@@ -21,7 +21,7 @@ function Options() {
   };
 
   return (
-    <div className='flex w-full md:w-fit gap-5 p-5 flex-row absolute bottom-2 left-0 rounded-xl justify-around bg-white sm:static md:pe-20 sm:flex-col sm:w-fit sm:justify-normal z-10'>
+    <div className='flex w-full md:w-fit gap-5 p-5 flex-row absolute bottom-1 left-0 rounded-xl justify-around bg-white sm:static md:pe-20 sm:flex-col sm:w-fit sm:justify-normal z-10'>
       <Link to='/' className={location.pathname === '/' ? 'active-link' : ''}>
         <button className={`flex items-center gap-2 hover:text-primary-color ${location.pathname === '/' ? 'text-primary-color' : ''}`}>
           <i className="fa-solid fa-house "></i>
