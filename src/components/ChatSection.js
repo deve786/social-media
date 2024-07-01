@@ -7,7 +7,7 @@ import io from 'socket.io-client';
 
 const socket = io('http://localhost:8000', { autoConnect: false }); // Replace with your backend server URL
 
-function ChatSection({ selectedUserId }) {
+function ChatSection({ selectedUserId, isChatVisible, onBack }) {
   const [messages, setMessages] = useState([]);
   const [user, setUser] = useState({});
   const [currentUserId, setCurrentUserId] = useState('');
@@ -71,9 +71,12 @@ function ChatSection({ selectedUserId }) {
   }
 
   return (
-    <div className='bg-white rounded-xl justify-between hidden flex-col md:flex md:flex-1'>
+    <div className={`bg-white rounded-xl justify-between flex-col flex-1 md:flex-1 ${isChatVisible ? 'flex' : 'hidden'}`}>
       <div className='flex flex-col justify-between'>
         <div className='flex items-center justify-between cursor-pointer py-3 pe-3 ms-1'>
+          <button onClick={onBack} className="md:hidden">
+            Back
+          </button>
           <div className='flex gap-2 items-center'>
             <div>
               <img src={selectedUserId?.profileImg ? `${baseURL}/uploads/${selectedUserId?.profileImg}` : "./avatar.png"} alt="" className='w-10 h-10 rounded-full' />

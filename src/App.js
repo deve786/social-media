@@ -21,7 +21,7 @@ function App() {
         <Route path='/inbox' element={token ? <Message /> : <Navigate to="/login" />} />
         <Route path='/suggest' element={token ? <SuggestM /> : <Navigate to="/login" />} />
         <Route path='/friends' element={token ? <FriendsM /> : <Navigate to="/login" />} />
-        {/* <Route path='/chat' element={token ? <ChatSectionM /> : <Navigate to="/login" />} /> */}
+        <Route path='/chat' element={token ? <ChatSectionM /> : <Navigate to="/login" />} />
         
 
         <Route path='/notifications' element={token ? <Notification /> : <Navigate to="/login" />} />

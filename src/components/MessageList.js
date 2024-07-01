@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { getMeAPI, getMessageUsersAPI } from '../services/allAPI';
 import { baseURL } from '../services/baseURL';
 
-function MessageList({ onSelectUser }) {
+function MessageList({ onSelectUser, isChatVisible }) {
   const [users, setUsers] = useState([]);
-  const [me, setMe] = useState([])
+  const [me, setMe] = useState([]);
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -24,7 +24,6 @@ function MessageList({ onSelectUser }) {
       try {
         const data = await getMeAPI();
         setMe(data || {});
-       
       } catch (error) {
         console.error("Error fetching user data:", error);
         setMe({});
@@ -33,9 +32,9 @@ function MessageList({ onSelectUser }) {
 
     fetchUserData();
   }, []);
-  console.log(users._id);
+
   return (
-    <div className='bg-white p-1 rounded-xl overflow-y-scroll h-[97vh] no-scrollbar flex-1'>
+    <div className={`bg-white p-1 rounded-xl overflow-y-scroll h-[97vh] no-scrollbar flex-1 ${isChatVisible ? 'hidden md:block' : 'block'}`}>
       <h3 className='mb-3 font-semibold'>{me.fullName}</h3>
       <div>
         {users.map((user, index) => (
