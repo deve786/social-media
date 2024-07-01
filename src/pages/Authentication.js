@@ -30,7 +30,7 @@ function Authentication({ register }) {
             const result = await registerAPI(inputs);
             localStorage.setItem('token', result.data.token);
             toast.success("Registration successful");
-            navigate('/');
+            navigate('/login');
         } catch (error) {
             console.error("Registration failed:", error);
             toast.error("Registration failed");
