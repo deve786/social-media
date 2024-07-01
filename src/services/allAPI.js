@@ -43,6 +43,8 @@ export const createPostAPI = async (body) => {
 
 
 
+
+
 // deleteUserPost
 export const deleteUserPostAPI = async (id) => {
   return await commonRequest('DELETE', `${baseURL}/api/post/${id}`, {});
@@ -98,4 +100,25 @@ export const commentAPI = async (id,body) => {
 
 export const updateProfileAPI = async (body) => {
   return await commonRequest('POST', `${baseURL}/api/user/update`, body, true);
+};
+
+
+
+
+// get Message USers
+export const getMessageUsersAPI = async () => {
+  return await commonRequest('GET', `${baseURL}/api/user`, {}); 
+};
+
+
+// getMessages
+export const getMessagesAPI = async (id) => {
+  return await commonRequest('GET', `${baseURL}/api/messages/${id}`, {});
+};
+
+
+
+// send Message
+export const sendMessageAPI = async (id, body) => {
+  return await commonRequest('POST', `${baseURL}/api/messages/send/${id}`, body); 
 };

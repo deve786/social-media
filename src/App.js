@@ -8,6 +8,8 @@ import Profile from './pages/Profile';
 import Authentication from './pages/Authentication';
 import SuggestM from './pages/SuggestM';
 import FriendsM from './pages/FriendsM';
+import ChatSectionM from './components/ChatSectionM';
+
 
 function App() {
   const token = localStorage.getItem('token');
@@ -19,6 +21,9 @@ function App() {
         <Route path='/inbox' element={token ? <Message /> : <Navigate to="/login" />} />
         <Route path='/suggest' element={token ? <SuggestM /> : <Navigate to="/login" />} />
         <Route path='/friends' element={token ? <FriendsM /> : <Navigate to="/login" />} />
+        {/* <Route path='/chat' element={token ? <ChatSectionM /> : <Navigate to="/login" />} /> */}
+        
+
         <Route path='/notifications' element={token ? <Notification /> : <Navigate to="/login" />} />
         <Route path='/profile' element={token ? <Profile /> : <Navigate to="/login" />} />
         <Route path='/login' element={<Authentication />} />
