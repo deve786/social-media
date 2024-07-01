@@ -28,7 +28,7 @@ function ChatInput({ receiverId, onNewMessage }) {
     };
 
     return (
-        <div className='p-3 flex items-center gap-1 w-full border border-2 rounded-full'>
+        <div className='p-3 flex items-center gap-1 w-full border border-2 h-10  md:h-full border-black rounded-full'>
             <i className="fa-solid fa-image text-xl cursor-pointer"></i>
             <input
                 type="text"

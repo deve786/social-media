@@ -19,7 +19,7 @@ function Chats({ messages, currentUserId, user, receiver }) {
   }
 
   return (
-    <div className='p-3 overflow-y-scroll h-[74vh] custom-scrollbar'>
+    <div className='p-3 overflow-y-scroll h-[65vh] custom-scrollbar'>
       {messages.map((message, index) => (
         <div
           key={index}
