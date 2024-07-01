@@ -71,7 +71,7 @@ function ChatSection({ selectedUserId, isChatVisible, onBack }) {
   }
 
   return (
-    <div className={`bg-white rounded-xl justify-between flex-col flex-1 md:flex-1 ${isChatVisible ? 'flex' : 'hidden'}`}>
+    <div className={`bg-white rounded-xl justify-between flex-col md:h-screen h-96 flex-1 md:flex-1 ${isChatVisible ? 'flex' : 'hidden'}`}>
       <div className='flex flex-col justify-between'>
         <div className='flex items-center justify-between cursor-pointer py-3 pe-3 ms-1'>
           <button onClick={onBack} className="md:hidden">
