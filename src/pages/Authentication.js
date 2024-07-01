@@ -81,7 +81,7 @@ function Authentication({ register }) {
                         <input type="password" name='password' onChange={handleInput} className='border bg-slate-300 outline-none p-1 py-2 rounded px-2 w-full' />
                     </div>
                     <div className='flex flex-col gap-1 mt-2'>
-                        <button className='bg-primary-color text-white rounded py-2 hover:bg-fuchsia-500 w-full'>
+                    <button className='bg-primary-color rounded py-2 hover:bg-fuchsia-500' onClick={register ? handleRegister : handleLogin}>
                             {register ? "Create an Account" : "Login"}
                         </button>
                     </div>
