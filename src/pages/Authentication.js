@@ -65,8 +65,13 @@ function Authentication({ register }) {
                 toast.error("Login failed: Invalid response");
             }
         } catch (error) {
-            console.error(error.response.data.error);
-            toast.error("Login failed");
+            if (error.response && error.response.data && error.response.data.error) {
+                toast.error(error.response.data.error);
+            } else {
+                toast.error("Login failed");
+            }
+            
+            
         }
     };
 

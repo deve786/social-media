@@ -103,7 +103,7 @@ console.log(posts);
             </div>
             <div className='flex gap-3 flex-col'>
               <p>{post.text}</p>
-              <img src={post.img ? `${baseURL}/${post?.img}` : './post.jpg'} alt="" className='w-full rounded' />
+              <img src={post.img ? `${baseURL}/${post?.img}` : ''} alt="" className='w-full rounded' />
             </div>
             {/* Comment section */}
             <div>
