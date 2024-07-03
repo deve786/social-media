@@ -31,7 +31,9 @@ function UserPost() {
 
   const handleDeletePost = async (postId) => {
     try {
+      console.log("postid ",postId);
       const response = await deleteUserPostAPI(postId);
+      console.log(response);
       toast.success("Post deleted successfully");
       getUserPost();
     } catch (error) {
