@@ -59,7 +59,7 @@ export const getMeAPI = async () => {
 
 // logout
 export const logoutAPI = async () => {
-    localStorage.removeItem('token'); // Clear the token from localStorage on logout
+  sessionStorage.removeItem('token'); // Clear the token from sessionStorage on logout
     return await commonRequest('POST', `${baseURL}/api/auth/logout`, {});
 };
 

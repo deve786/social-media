@@ -12,7 +12,7 @@ import ChatSectionM from './components/ChatSectionM';
 
 
 function App() {
-  const token = localStorage.getItem('token');
+  const token = sessionStorage.getItem('token');
 
   return (
     <div className="App min-h-screen bg-gray-200">

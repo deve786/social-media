@@ -11,7 +11,7 @@ function Options() {
   const handleLogout = async () => {
     try {
       await logoutAPI();
-      localStorage.removeItem('token'); // Clear the token from localStorage
+      sessionStorage.removeItem('token'); // Clear the token from sessionStorage
       toast.success("Logged out successfully");
       navigate('/login'); // Redirect to the login page or any other appropriate page
     } catch (error) {

@@ -58,7 +58,7 @@ function Authentication({ register }) {
             console.log("API response:", result);  // Log the API response
 
             if (result.token) {
-                localStorage.setItem('token', result.token);
+                sessionStorage.setItem('token', result.token);
                 toast.success("Login successfully");
                 navigate('/');  // Ensure navigate is called correctly
             } else {

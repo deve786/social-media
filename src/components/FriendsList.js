@@ -23,7 +23,7 @@ function FriendsList() {
   useEffect(() => {
     fetchFriendsList();
   }, []);
-
+console.log(friends);
   return (
     <div className='p-5 pe-20 hidden md:block'>
       <h3 className='mb-3'>My Friends</h3>

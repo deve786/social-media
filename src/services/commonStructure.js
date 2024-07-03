@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const commonRequest = async (method, url, body, isFormData = false) => {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     const config = {
         method,
         url,
