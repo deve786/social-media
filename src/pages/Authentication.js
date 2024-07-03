@@ -26,14 +26,16 @@ function Authentication({ register }) {
                 toast.error("Please enter all inputs");
                 return;
             }
-
+            console.log("registe");
+            console.log(inputs);
             const result = await registerAPI(inputs);
+            console.log(result);
             localStorage.setItem('token', result.data.token);
             toast.success("Registration successful");
             navigate('/login');
         } catch (error) {
             console.error("Registration failed:", error);
-            toast.error("Registration failed");
+            toast.error("Registration failed",error);
         }
     };
 
@@ -87,7 +89,7 @@ function Authentication({ register }) {
                         <input type="password" name='password' onChange={handleInput} className='border bg-slate-300 outline-none p-1 py-2 rounded px-2 w-full' />
                     </div>
                     <div className='flex flex-col gap-1 mt-2'>
-                    <button className='bg-primary-color rounded py-2 hover:bg-fuchsia-500' onClick={register ? handleRegister : handleLogin}>
+                        <button className='bg-primary-color rounded py-2 hover:bg-fuchsia-500' onClick={register ? handleRegister : handleLogin}>
                             {register ? "Create an Account" : "Login"}
                         </button>
                     </div>
