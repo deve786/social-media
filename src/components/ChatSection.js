@@ -5,7 +5,7 @@ import { getMessagesAPI, getMeAPI } from '../services/allAPI';
 import { baseURL } from '../services/baseURL';
 import io from 'socket.io-client';
 
-const socket = io('http://localhost:8000', { autoConnect: false }); // Replace with your backend server URL
+const socket = io('https://social-media-backend-wsny.onrender.com', { autoConnect: false }); //  backend server URL
 
 function ChatSection({ selectedUserId, isChatVisible, onBack }) {
   const [messages, setMessages] = useState([]);
@@ -17,7 +17,7 @@ function ChatSection({ selectedUserId, isChatVisible, onBack }) {
       try {
         const data = await getMeAPI();
         setUser(data || {});
-        setCurrentUserId(data._id); // Assuming the user ID is in the _id field
+        setCurrentUserId(data._id); 
 
         // Establish socket connection with userId
         if (data && data._id) {
@@ -67,7 +67,7 @@ function ChatSection({ selectedUserId, isChatVisible, onBack }) {
   };
 
   if (!selectedUserId || !messages) {
-    return <div></div>; // Or any placeholder or loading indicator
+    return <div></div>; 
   }
 
   return (
@@ -91,7 +91,7 @@ function ChatSection({ selectedUserId, isChatVisible, onBack }) {
         <Chats messages={messages} currentUserId={currentUserId} user={user} receiver={selectedUserId} />
       </div>
       <div className='p-5'>
-        <ChatInput receiverId={selectedUserId} onNewMessage={handleNewMessage} />
+        <ChatInput currentUserId={currentUserId} receiverId={selectedUserId} onNewMessage={handleNewMessage} />
       </div>
     </div>
   );

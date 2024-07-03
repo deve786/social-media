@@ -21,7 +21,8 @@ function Message() {
       <Options />
       <MessageList onSelectUser={handleSelectUser} isChatVisible={isChatVisible} />
       {selectedUser && (
-        <div className=' flex-1 md:flex-1 flex md:h-screen h-[90vh] '><ChatSection selectedUserId={selectedUser} isChatVisible={isChatVisible} onBack={handleBack} /></div>
+        <div className=' flex-1 md:flex-1 flex md:h-screen h-[90vh] '>
+          <ChatSection selectedUserId={selectedUser} isChatVisible={isChatVisible} onBack={handleBack} /></div>
       )}
     </div>
   )

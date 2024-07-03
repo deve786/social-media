@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { followUnfollowAPI, getFollowingAPI } from '../services/allAPI';
 import { baseURL } from '../services/baseURL';
 
-function FriendsList() {
+function FriendsList({friend,setSuggest,suggest}) {
   const [friends, setFriends] = useState([]);
 
   const handleFollowUnfollow = async (id) => {
     const result = await followUnfollowAPI(id);
     fetchFriendsList();
+    setSuggest(!suggest)
     console.log(result);
   }
 
@@ -22,7 +23,7 @@ function FriendsList() {
 
   useEffect(() => {
     fetchFriendsList();
-  }, []);
+  }, [friend]);
 console.log(friends);
   return (
     <div className='p-5 pe-20 hidden md:block'>

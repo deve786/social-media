@@ -1,10 +1,10 @@
+import { useState } from 'react';
 import io from 'socket.io-client';
 import { sendMessageAPI } from '../services/allAPI';
-import { useState } from 'react';
 
-const socket = io('http://localhost:4000'); // Ensure this matches the server URL
+const socket = io('https://social-media-backend-wsny.onrender.com'); // Ensure this matches the server URL
 
-function ChatInput({ receiverId, onNewMessage }) {
+function ChatInput({ currentUserId, receiverId, onNewMessage }) {
     const [message, setMessage] = useState('');
 
     const handleSendMessage = async () => {
@@ -16,7 +16,7 @@ function ChatInput({ receiverId, onNewMessage }) {
                 setMessage('');
 
                 // Emit a sendMessage event to the server
-                const newMessage = { senderId: receiverId._id, message };
+                const newMessage = { senderId: currentUserId, receiverId: receiverId._id, message };
                 socket.emit('sendMessage', newMessage);
 
                 // Update messages in the parent component
@@ -28,7 +28,7 @@ function ChatInput({ receiverId, onNewMessage }) {
     };
 
     return (
-        <div className='p-3 flex items-center gap-1 w-full border border-2 h-10  md:h-full border-black rounded-full'>
+        <div className='p-3 flex items-center gap-1 w-full border border-2 h-10 md:h-full border-black rounded-full'>
             <i className="fa-solid fa-image text-xl cursor-pointer"></i>
             <input
                 type="text"

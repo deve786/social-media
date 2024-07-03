@@ -5,6 +5,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function Authentication({ register }) {
+
+    const [loading, setLoading] = useState(false);
     const [inputs, setInputs] = useState({
         username: '',
         fullName: '',
@@ -21,46 +23,44 @@ function Authentication({ register }) {
 
     const handleRegister = async () => {
         const { username, fullName, email, password } = inputs;
+        if (!username || !fullName || !email || !password) {
+            toast.error("Please enter all inputs");
+            return;
+        }
+        setLoading(true);
         try {
-            if (!username || !fullName || !email || !password) {
-                toast.error("Please enter all inputs");
-                return;
-            }
-         
             const result = await registerAPI(inputs);
             console.log(result);
-
             toast.success("Registration successful");
             navigate('/login');
         } catch (error) {
-            // console.log(error);
-            // console.error("Registration failed:", error);
-            // toast.error(`Registration failed: ${error.message}`);
             if (error.response && error.response.data && error.response.data.error) {
                 toast.error(error.response.data.error);
             } else {
                 toast.error("Registration failed");
             }
             console.error("Registration failed:", error);
-        
+        } finally {
+            setLoading(false);
         }
     };
 
     const handleLogin = async () => {
         const { username, password } = inputs;
+        if (!username || !password) {
+            toast.error("Please enter all inputs");
+            return;
+        }
+        setLoading(true);
         try {
-            if (!username || !password) {
-                toast.error("Please enter all inputs");
-                return;
-            }
-
             const result = await loginAPI(inputs);
             console.log("API response:", result);  // Log the API response
+            const { token, user } = result;  // Ensure you're accessing the correct fields
 
-            if (result.token) {
-                sessionStorage.setItem('token', result.token);
-                toast.success("Login successfully");
-                navigate('/');  // Ensure navigate is called correctly
+            if (token) {
+                sessionStorage.setItem('token', token);
+                toast.success("Login successful");
+                navigate('/');
             } else {
                 toast.error("Login failed: Invalid response");
             }
@@ -70,8 +70,9 @@ function Authentication({ register }) {
             } else {
                 toast.error("Login failed");
             }
-            
-            
+            console.error("Login failed:", error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -101,8 +102,8 @@ function Authentication({ register }) {
                         <input type="password" name='password' onChange={handleInput} className='border bg-slate-300 outline-none p-1 py-2 rounded px-2 w-full' />
                     </div>
                     <div className='flex flex-col gap-1 mt-2'>
-                        <button className='bg-primary-color rounded py-2 hover:bg-fuchsia-500' onClick={register ? handleRegister : handleLogin}>
-                            {register ? "Create an Account" : "Login"}
+                        <button className='bg-primary-color rounded py-2 hover:bg-fuchsia-500' onClick={register ? handleRegister : handleLogin} disabled={loading}>
+                            {loading ? "Loading..." : register ? "Create an Account" : "Login"}
                         </button>
                     </div>
                     <div className='flex flex-col gap-1 mt-2 text-center'>

@@ -3,7 +3,7 @@ import { followUnfollowAPI, getMeAPI, getSuggestAPI } from '../services/allAPI';
 import { baseURL } from '../services/baseURL';
 
 
-function Suggest() {
+function Suggest({setFriend,friend,suggest}) {
     const [user, setUser] = useState({});
 
   const [suggestedFriends, setSuggestedFriends] = useState([]);
@@ -22,13 +22,14 @@ function Suggest() {
   const handleFollowUnfollow=async(id)=>{
     const result=await followUnfollowAPI(id)
     fetchSuggestedFriends()
+    setFriend(!friend)
     console.log(result);
   }
   
 
   useEffect(() => {
     fetchSuggestedFriends();
-  }, []);
+  }, [suggest]);
 console.log(suggestedFriends);
   return (
     <div className='bg-white p-3 px-5 rounded-xl overflow-y-scroll h-[96vh] no-scrollbar hidden md:block'>

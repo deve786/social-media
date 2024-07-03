@@ -88,7 +88,7 @@ function ProfileHeader() {
             name='coverImg'
             onChange={handleCoverImageChange}
           />
-          <div className='bg-slate-600'><img src={user.coverImg ? `${baseURL}/uploads/${user?.coverImg}` : ''} alt="Profile Cover" className="w-full h-96 object-cover  border border-black rounded" /></div>
+          <div className='bg-slate-600'><img src={user.coverImg ? `${baseURL}/uploads/${user?.coverImg}` : './coverImg.jpeg'} alt="Profile Cover" className="w-full h-96 object-cover  border border-black rounded" /></div>
         </label>
         <div className="w-52 rounded-full absolute bottom-0 left-5 transform translate-y-1/2">
           <label htmlFor="profileImg">

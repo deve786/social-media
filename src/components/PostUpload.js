@@ -9,32 +9,37 @@ function PostUpload() {
     const [text, setText] = useState('');
     const [image, setImage] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const handlePostUpload = async () => {
-        try {
-            const formData = new FormData();
-            formData.append('text', text);
-            
-            if (image) {
-                formData.append('img', image);
-            }
-            
-            // Log the FormData content
-            for (let [key, value] of formData.entries()) {
-                console.log(key, value);
-            }
 
+        const formData = new FormData();
+        formData.append('text', text);
+
+        if (image) {
+            formData.append('img', image);
+        }
+
+        // Log the FormData content
+        for (let [key, value] of formData.entries()) {
+            console.log(key, value);
+        }
+        setLoading(true);
+        try {
             const result = await createPostAPI(formData);
             console.log('Post uploaded:', result);
             toast.success("Post uploaded successfully");
-
 
             // Optionally reset state after successful upload
             setText('');
             setImage(null);
             setImagePreview(null);
-        } catch (error) {
+        }
+        catch (error) {
             console.error('Error uploading post:', error);
+        }
+        finally {
+            setLoading(false);
         }
     };
 
@@ -96,7 +101,7 @@ function PostUpload() {
                     className='bg-primary-color px-3 py-1 rounded text-white'
                     onClick={handlePostUpload}
                 >
-                    Post
+                    {loading? "Posting..": "Post"}
                 </button>
             </div>
             {imagePreview && (
