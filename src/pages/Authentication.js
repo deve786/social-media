@@ -26,16 +26,23 @@ function Authentication({ register }) {
                 toast.error("Please enter all inputs");
                 return;
             }
-            console.log("registe");
-            console.log(inputs);
+         
             const result = await registerAPI(inputs);
             console.log(result);
-            localStorage.setItem('token', result.data.token);
+
             toast.success("Registration successful");
             navigate('/login');
         } catch (error) {
+            // console.log(error);
+            // console.error("Registration failed:", error);
+            // toast.error(`Registration failed: ${error.message}`);
+            if (error.response && error.response.data && error.response.data.error) {
+                toast.error(error.response.data.error);
+            } else {
+                toast.error("Registration failed");
+            }
             console.error("Registration failed:", error);
-            toast.error("Registration failed",error);
+        
         }
     };
 
@@ -58,7 +65,7 @@ function Authentication({ register }) {
                 toast.error("Login failed: Invalid response");
             }
         } catch (error) {
-            console.error("Login failed:", error);
+            console.error(error.response.data.error);
             toast.error("Login failed");
         }
     };
