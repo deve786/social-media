@@ -12,11 +12,12 @@ import ChatSectionM from './components/ChatSectionM';
 
 
 function App() {
-
+  const [auth, setAuth] = useState(false)
   const [suggest, setSuggest] = useState(false)
   const [friend, setFriend] = useState(false)
   const token = sessionStorage.getItem('token');
-
+  
+ 
   return (
     <div className="App min-h-screen bg-gray-200">
       <Routes>
@@ -29,7 +30,7 @@ function App() {
 
         <Route path='/notifications' element={token ? <Notification /> : <Navigate to="/login" />} />
         <Route path='/profile' element={token ? <Profile setFriend={setFriend} friend={friend} /> : <Navigate to="/login" />} />
-        <Route path='/login' element={<Authentication />} />
+        <Route path='/login' element={<Authentication setAuth={setAuth}/>} />
         <Route path='/register' element={<Authentication register />} />
         <Route path='*' element={<Navigate to={token ? '/' : '/login'} />} />
       </Routes>

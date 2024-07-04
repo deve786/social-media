@@ -4,7 +4,7 @@ import { loginAPI, registerAPI } from '../services/allAPI';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function Authentication({ register }) {
+function Authentication({ register,setAuth }) {
 
     const [loading, setLoading] = useState(false);
     const [inputs, setInputs] = useState({
@@ -55,10 +55,11 @@ function Authentication({ register }) {
         try {
             const result = await loginAPI(inputs);
             console.log("API response:", result);  // Log the API response
-            const { token, user } = result;  // Ensure you're accessing the correct fields
+            const { token } = result;  // Ensure you're accessing the correct fields
             sessionStorage.setItem('token', token);
             if (sessionStorage.getItem('token')) {
-
+                console.log("log");
+                setAuth(prev=>!prev)
                 toast.success("Login successful");
 
                 navigate('/');
