@@ -56,11 +56,13 @@ function Authentication({ register }) {
             const result = await loginAPI(inputs);
             console.log("API response:", result);  // Log the API response
             const { token, user } = result;  // Ensure you're accessing the correct fields
+            sessionStorage.setItem('token', token);
+            if (sessionStorage.getItem('token')) {
 
-            if (token) {
-                sessionStorage.setItem('token', token);
                 toast.success("Login successful");
+
                 navigate('/');
+
             } else {
                 toast.error("Login failed: Invalid response");
             }
