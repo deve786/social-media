@@ -77,8 +77,8 @@ function Authentication({ register }) {
     };
 
     return (
-        <div className='p-3 flex justify-center items-center h-screen'>
-            <div className='bg-white rounded-xl p-3 py-8 px-8 w-full max-w-lg mx-2'>
+        <div className='p-3 flex justify-center items-center h-screen auth-bg'>
+            <div className='bg-white rounded-xl p-3 py-8 px-8 w-full max-w-lg mx-2 auth-box'>
                 <h2 className='text-xl font-semibold'>{register ? "Create an Account" : "Login Here"}</h2>
                 <div className='mt-3 flex flex-col gap-4'>
                     {register && (

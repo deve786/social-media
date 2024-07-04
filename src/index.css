@@ -54,3 +54,19 @@
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+.auth-bg{
+  background-image: url('../public/bg.jpg');
+  background-size: cover;
+  
+}
+
+.auth-box{
+  
+background: rgba(255, 255, 255, 0.23);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(4.3px);
+-webkit-backdrop-filter: blur(4.3px);
+border: 1px solid rgba(255, 255, 255, 0.12);
+}
