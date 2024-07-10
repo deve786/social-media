@@ -52,11 +52,7 @@ function MessageList({ onSelectUser, isChatVisible }) {
                 <p className='text-xs text-tertiary-color'>{user.content}</p>
               </div>
             </div>
-            <div>
-              <p>
-                <i className="fa-solid fa-circle text-[7px] text-primary-color"></i>
-              </p>
-            </div>
+            
           </div>
         ))}
       </div>

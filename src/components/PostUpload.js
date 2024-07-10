@@ -72,7 +72,7 @@ function PostUpload() {
 
     return (
         <div className='bg-white p-3 rounded-xl flex flex-col gap-3'>
-            <div className='flex justify-between items-center'>
+            <div className='flex justify-between items-center gap-2'>
                 <img src={user.profileImg ? `${baseURL}/uploads/${user?.profileImg}` : './avatar.png'} alt="Avatar" className='w-10 h-10 rounded-full' />
                 <input
                     type="text"
@@ -95,7 +95,7 @@ function PostUpload() {
                         style={{ display: 'none' }}
                         name='img'
                     />
-                    <i className="fa-regular fa-face-smile text-xl cursor-pointer"></i>
+                    
                 </div>
                 <button
                     className='bg-primary-color px-3 py-1 rounded text-white'

@@ -139,8 +139,7 @@ function UserPost() {
               <div className='flex justify-between w-full gap-2'>
                 <img src={post.user.profileImg ? `${baseURL}/uploads/${post.user.profileImg}` : './avatar.png'} alt="" className='h-10 w-10 rounded-full' />
                 <div className='relative w-full bg-gray-100 flex'>
-                  <input type="text" className='w-full bg-transparent outline-none px-4 py-2 text-sm' value={comment} onChange={(e) => setComment(e.target.value)} placeholder="Add a comment..." />
-                  <i className="far fa-smile text-xl cursor-pointer absolute top-1/2 transform -translate-y-1/2 right-4"></i>
+                  <input type="text" className='w-full bg-transparent  outline-none px-4 py-2 text-sm' value={comment} onChange={(e) => setComment(e.target.value)} placeholder="Add a comment..." />
                 </div>
                 <button className='ml-3' onClick={() => handleComment(post._id)}>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6 text-primary-color">

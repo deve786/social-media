@@ -183,7 +183,6 @@ function Post() {
                       onChange={handleInputChange}
                       placeholder="Add a comment..."
                     />
-                    <i className="far fa-smile text-xl cursor-pointer absolute top-1/2 transform -translate-y-1/2 right-4"></i>
                   </div>
                   <button className='ml-3' onClick={() => handleComment(post._id)}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6 text-primary-color">
