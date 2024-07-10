@@ -5,7 +5,7 @@ import { getMessagesAPI, getMeAPI } from '../services/allAPI';
 import { baseURL } from '../services/baseURL';
 import io from 'socket.io-client';
 
-const socket = io('https://social-media-backend-wsny.onrender.com', { autoConnect: false }); //  backend server URL
+const socket = io('http://localhost:8000', { autoConnect: false }); //  backend server URL
 
 function ChatSection({ selectedUserId, isChatVisible, onBack }) {
   const [messages, setMessages] = useState([]);

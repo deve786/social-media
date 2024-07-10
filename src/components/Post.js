@@ -48,7 +48,13 @@ function Post() {
     try {
       const response = await likeUnlikeAPI(postId);
       console.log('Like/Unlike Post Response:', response);
-      fetchFollowingPosts(); // Refresh posts after like/unlike
+      fetchFollowingPosts()
+      // Optimistically update the post list
+      setPosts((prevPosts) =>
+        prevPosts.map((post) =>
+          post._id === postId ? { ...post, likes: response.likes } : post
+        )
+      );
     } catch (error) {
       console.error('Error liking/unliking post:', error);
     }
@@ -61,7 +67,7 @@ function Post() {
       console.log('Commented on post:', response);
       toast.success("Comment added successfully!"); // Trigger toast notification
       setComment('');
-      fetchFollowingPosts();
+      fetchFollowingPosts(); // Refresh posts to show new comment
     } catch (error) {
       console.error('Error commenting on post:', error);
       toast.error("Failed to add comment. Please try again."); // Toast for error scenario
@@ -99,6 +105,7 @@ function Post() {
     </div>
   );
 
+  console.log(posts);
   return (
     <>
       <ToastContainer />
@@ -107,7 +114,7 @@ function Post() {
       ) : (
         posts.map((post) => {
           const userId = user._id;
-          const isLiked = post.likes.includes(userId);
+          const isLiked = post.likes && post.likes.includes(userId);
 
           return (
             <div key={post._id} className='bg-white p-3 w-[100%] flex flex-col gap-3 rounded-xl'>
@@ -133,7 +140,7 @@ function Post() {
                       <i className={isLiked ? 'fa-solid fa-heart text-primary-color text-lg cursor-pointer' : 'fa-regular fa-heart text-lg cursor-pointer'}></i>
                     </button>
                   </span>
-                  <span>{post.likes.length} Likes</span>
+                  <span>{post.likes && post.likes.length} Likes</span>
                 </div>
                 <div className='flex justify-between w-full gap-2'>
                   <img src={user.profileImg ? `${baseURL}/uploads/${user?.profileImg}` : './avatar.png'} alt="" className=' w-10 h-10 rounded-full' />
