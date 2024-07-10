@@ -9,7 +9,7 @@ import Authentication from './pages/Authentication';
 import SuggestM from './pages/SuggestM';
 import FriendsM from './pages/FriendsM';
 import ChatSectionM from './components/ChatSectionM';
-
+import UserPage from './pages/UserPage';
 
 function App() {
   const [auth, setAuth] = useState(false)
@@ -32,6 +32,8 @@ function App() {
         <Route path='/profile' element={token ? <Profile setFriend={setFriend} friend={friend} /> : <Navigate to="/login" />} />
         <Route path='/login' element={<Authentication setAuth={setAuth}/>} />
         <Route path='/register' element={<Authentication register />} />
+        <Route path='/user/:userId' element={<UserPage  setFriend={setFriend} friend={friend} />} />
+
         <Route path='*' element={<Navigate to={token ? '/' : '/login'} />} />
       </Routes>
     </div>
