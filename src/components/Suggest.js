@@ -37,8 +37,9 @@ console.log(suggestedFriends);
       <h2 className='mb-3 font-semibold'>Suggested Friends</h2>
       
       {suggestedFriends.map((friend, index) => (
-        <Link to={`/user/${friend._id}`}>
+        
           <div key={index} className='flex items-center justify-between gap-4 cursor-pointer py-3 pe-3 hover:bg-hover-bg'>
+            <Link to={`/user/${friend._id}`}>
             <div className='flex items-center gap-2'>
               <div><img src={friend.profileImg?`${baseURL}/uploads/${friend?.profileImg}`: './avatar.png'}   alt={friend.username} className='w-10 h-10 rounded-full' /></div>
               <div className='flex flex-col leading-4'>
@@ -46,9 +47,10 @@ console.log(suggestedFriends);
                 <p className='text-xs text-tertiary-color'>{friend.location}</p>
               </div>
             </div>
+            </Link>
             <button onClick={()=>handleFollowUnfollow(friend._id)}><i className='fa-solid fa-user-plus cursor-pointer text-lg hover:text-primary-color'></i></button>
           </div>
-        </Link>
+        
       ))}
       
     </div>

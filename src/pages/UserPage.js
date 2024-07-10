@@ -5,7 +5,7 @@ import { allPostAPI, followUnfollowAPI, getMeAPI, getSingleUserAPI } from '../se
 import { useParams } from 'react-router-dom';
 import { baseURL } from '../services/baseURL';
 
-function UserPage({ friend, setFriend }) {
+function UserPage({ friend, setFriend,setSuggest,suggest }) {
     const { userId } = useParams();
     const [user, setUser] = useState({});
     const [posts, setPosts] = useState([]);
@@ -61,7 +61,7 @@ function UserPage({ friend, setFriend }) {
 
     return (
         <div className='p-3 flex justify-between overflow-hidden h-screen md:gap-2 sm:flex sm:flex-row gap-2'>
-            <div><LeftSection /></div>
+            <div><LeftSection friend={friend} setSuggest={setSuggest} suggest={suggest}/></div>
             <div className='flex flex-col gap-3 flex-1 overflow-y-scroll h-screen no-scrollbar'>
                 <div className='bg-white rounded-xl p-3 flex-1 overflow-y-scroll h-[96vh] no-scrollbar'>
                     <div className='p-9 flex items-center gap-5'>

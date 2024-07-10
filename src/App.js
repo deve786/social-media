@@ -29,10 +29,10 @@ function App() {
 
 
         <Route path='/notifications' element={token ? <Notification /> : <Navigate to="/login" />} />
-        <Route path='/profile' element={token ? <Profile setFriend={setFriend} friend={friend} /> : <Navigate to="/login" />} />
+        <Route path='/profile' element={token ? <Profile setFriend={setFriend} friend={friend}  suggest={suggest} setSuggest={setSuggest}/> : <Navigate to="/login" />} />
         <Route path='/login' element={<Authentication setAuth={setAuth}/>} />
         <Route path='/register' element={<Authentication register />} />
-        <Route path='/user/:userId' element={<UserPage  setFriend={setFriend} friend={friend} />} />
+        <Route path='/user/:userId' element={<UserPage  setFriend={setFriend} friend={friend} suggest={suggest} setSuggest={setSuggest}/>} />
 
         <Route path='*' element={<Navigate to={token ? '/' : '/login'} />} />
       </Routes>
