@@ -131,6 +131,6 @@ export const likeUnlikeCommentAPI = async (postId,commentId) => {
 
 
 // deleteComment
-export const deleteCommentAPI = async (id) => {
-  return await commonRequest('DELETE', `${baseURL}/api/post/${id}`, {});
+export const deleteCommentAPI = async (postId,commentId) => {
+  return await commonRequest('DELETE', `${baseURL}/api/post/comment/${postId}/${commentId}`, {});
 };
