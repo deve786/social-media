@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { commentAPI, likeUnlikeAPI, followingPostAPI, getMeAPI } from '../services/allAPI';
+import { commentAPI, likeUnlikeAPI, followingPostAPI, getMeAPI, likeUnlikeCommentAPI } from '../services/allAPI';
 import { baseURL } from '../services/baseURL';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -48,7 +48,7 @@ function Post() {
     try {
       const response = await likeUnlikeAPI(postId);
       console.log('Like/Unlike Post Response:', response);
-      fetchFollowingPosts()
+      fetchFollowingPosts();
       // Optimistically update the post list
       setPosts((prevPosts) =>
         prevPosts.map((post) =>
@@ -71,6 +71,20 @@ function Post() {
     } catch (error) {
       console.error('Error commenting on post:', error);
       toast.error("Failed to add comment. Please try again."); // Toast for error scenario
+    }
+  };
+
+  // handle like and Unlike the comment
+  const handleLikeUnlikeComment = async (postId, commentId) => {
+    try {
+      const response = await likeUnlikeCommentAPI(postId, commentId);
+      console.log(response);
+      // toast.success("Comment added successfully!"); // Trigger toast notification
+      // setComment('');
+      fetchFollowingPosts(); // Refresh posts to show new comment
+    } catch (error) {
+      console.error('Error like and unlike comment on post:', error);
+      toast.error("Failed to like and unlike comment. Please try again."); // Toast for error scenario
     }
   };
 
@@ -164,12 +178,26 @@ function Post() {
                 <div>
                   <div className='flex justify-start flex-col ms-10'>
                     <h2>Comments</h2>
-                    {post.comments.map((comment, index) => (
-                      <div key={index} className='flex items-center mb-2 gap-2'>
-                        <img src={comment.user.profileImg ? `${baseURL}/uploads/${comment.user?.profileImg}` : './avatar.png'} alt="" className='w-8 h-8 rounded-full' />
-                        <p className='text-sm'>{comment.text}</p>
-                      </div>
-                    ))}
+                    {post.comments.map((comment, index) => {
+                      const isCommentLiked = comment.likes && comment.likes.includes(userId);
+
+                      return (
+                        <div key={index} className='flex flex-col  mb-1 '>
+                          <div className='flex items-center gap-2'>
+                            <img src={comment.user.profileImg ? `${baseURL}/uploads/${comment.user?.profileImg}` : './avatar.png'} alt="" className='w-8 h-8 rounded-full' />
+                            <p className='text-sm'>{comment.text}</p>
+                          </div>
+                          <div className='flex gap-1 items-center ms-10'>
+                            <span>
+                              <button onClick={() => handleLikeUnlikeComment(post._id, comment._id)}>
+                                <i className={isCommentLiked ? 'fa-solid fa-heart text-primary-color text-sm cursor-pointer' : 'fa-regular fa-heart text-sm cursor-pointer'}></i>
+                              </button>
+                            </span>
+                            <span className='text-sm'>{comment.likes && comment.likes.length} Likes</span>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               </div>

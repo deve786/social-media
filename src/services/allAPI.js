@@ -122,3 +122,15 @@ export const getMessagesAPI = async (id) => {
 export const sendMessageAPI = async (id, body) => {
   return await commonRequest('POST', `${baseURL}/api/messages/send/${id}`, body); 
 };
+
+
+// Like and Unlike Comment
+export const likeUnlikeCommentAPI = async (postId,commentId) => {
+  return await commonRequest('POST', `${baseURL}/api/post/comment/like/${postId}/${commentId}`, {});
+};
+
+
+// deleteComment
+export const deleteCommentAPI = async (id) => {
+  return await commonRequest('DELETE', `${baseURL}/api/post/${id}`, {});
+};
