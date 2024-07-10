@@ -69,11 +69,13 @@ function UserPage({ friend, setFriend }) {
                             <img src={user.profileImg ? `${baseURL}/uploads/${user.profileImg}` : './avatar.png'} alt={user.username} className='w-32 h-32 rounded-full' />
                         </div>
                         <div>
-                            <div className='flex md:gap-10 md:flex-row flex-col gap-2'>
-                                <h5 className='font-semibold'>{user.fullName}</h5>
-                                <button onClick={() => handleFollowUnfollow(user._id)} className='border px-4 py-1 rounded hover:bg-gray-300'>
-                                    {isFollowing ? 'Unfollow' : 'Follow'}
-                                </button>
+                            <div className='flex md:gap-2 flex-col gap-2'>
+                                <div className='flex flex-row gap-5 items-center'>
+                                    <h5 className='font-semibold'>{user.fullName}</h5>
+                                    <button onClick={() => handleFollowUnfollow(user._id)} className='border px-4 py-1 rounded hover:bg-gray-300'>
+                                        {isFollowing ? 'Unfollow' : 'Follow'}
+                                    </button>
+                                </div>
                                 <p className='text-tertiary-color text-sm md:text-md flex gap-2 items-center'>
                                     <i className="fa-regular fa-calendar-days"></i>
                                     Joined <span>{new Date(user.createdAt).toLocaleDateString()}</span>
