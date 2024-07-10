@@ -28,7 +28,7 @@ function Post() {
   // Fetch following posts on component mount
   useEffect(() => {
     fetchFollowingPosts();
-  }, []);
+  }, [posts]);
 
   // Function to fetch following posts
   const fetchFollowingPosts = async () => {
