@@ -3,6 +3,7 @@ import { commentAPI, likeUnlikeAPI, followingPostAPI, getMeAPI, likeUnlikeCommen
 import { baseURL } from '../services/baseURL';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Link } from 'react-router-dom';
 
 function Post() {
   const [comment, setComment] = useState('');
@@ -149,7 +150,8 @@ function Post() {
           return (
             <div key={post._id} className='bg-white p-3 w-[100%] flex flex-col gap-3 rounded-xl'>
               <div className='flex flex-row items-center justify-between'>
-                <div className='flex flex-row gap-2'>
+              <Link to={`/user/${post.user._id}`}>
+              <div className='flex flex-row gap-2'>
                   <div className='flex'>
                     <img src={post.user.profileImg ? `${baseURL}/uploads/${post.user?.profileImg}` : './avatar.png'} alt="Avatar" className='w-10 h-10 rounded-full' />
                   </div>
@@ -158,6 +160,7 @@ function Post() {
                     <p className='text-xs text-tertiary-color'>{new Date(post.createdAt).toLocaleString()}</p>
                   </div>
                 </div>
+                </Link>
               </div>
               <div className='flex gap-3 flex-col'>
                 <p>{post.text}</p>

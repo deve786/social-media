@@ -42,6 +42,11 @@ export const createPostAPI = async (body) => {
 
 
 
+// All Users
+export const getAllUsersAPI = async () => {
+  return await commonRequest('GET', `${baseURL}/api/user/allusers`, {});
+};
+
 
 
 
