@@ -29,7 +29,7 @@ function Options() {
         </button>
       </Link>
       <Link to='/search' className={location.pathname === '/search' ? 'active-link' : ''}>
-        <button className={`flex items-center gap-2 hover:text-primary-color focus:text-primary-color ${location.pathname === '/inbox' ? 'text-primary-color' : ''}`}>
+        <button className={`flex items-center gap-2 hover:text-primary-color focus:text-primary-color ${location.pathname === '/search' ? 'text-primary-color' : ''}`}>
         <i class="fa-solid fa-magnifying-glass"></i>
           <span className='hidden md:flex'>search</span>
         </button>
