@@ -2,7 +2,7 @@ import { useState } from 'react';
 import io from 'socket.io-client';
 import { sendMessageAPI } from '../services/allAPI';
 
-const socket = io('http://localhost:8000'); // Ensure this matches the server URL
+const socket = io('https://social-media-backend-wsny.onrender.com'); // Ensure this matches the server URL
 
 function ChatInput({ currentUserId, receiverId, onNewMessage }) {
     const [message, setMessage] = useState('');
